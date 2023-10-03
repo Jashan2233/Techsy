@@ -38,14 +38,29 @@ export const editOwnedProduct = (products) => ({
 });
 
 // Thunks
-
 export const getAllProductsThunk = () => async (dispatch) => {
   const res = await fetch("/api/products");
   if (res.ok) {
     const data = await res.json();
-    dispatch(getAllProductsThunk(data));
+    dispatch(getallProducts(data));
     return data;
-  } else {
-    console.log("Cant fetch:", data);
   }
 };
+
+const initialState = { allProducts: {}, userProducts: {}, singleProduct: {} };
+
+//Reducer
+
+const allProductsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_ALL_PRODUCTS: {
+      const newState = { ...state };
+      newState.allProducts = action.products;
+      return newState;
+    }
+    default:
+      return state;
+  }
+};
+
+export default allProductsReducer;
