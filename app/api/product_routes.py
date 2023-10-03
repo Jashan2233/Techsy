@@ -7,7 +7,7 @@ from datetime import date
 product_routes= Blueprint('products', __name__)
 
 
-
+#Get all products with Owner Infos!
 @product_routes.route('/')
 def get_products():
 #Get all Products!
@@ -23,7 +23,7 @@ def get_products():
         product['owner_info'] = product_owner['username']
     return res
 
-
+#Get Product by its ID!
 @product_routes.route('/<int:product_id>')
 def get_single_product(product_id):
 
