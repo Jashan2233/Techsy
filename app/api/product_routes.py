@@ -62,3 +62,28 @@ def create_product():
     else:
         errors = validation_errors_to_error_messages(form.errors)
         return {'errors': errors}, 400
+
+
+#Edit product based on its ID
+@product_routes.route('/<int:product_id>', methods=['PUT'])
+def edit_product(product_id):
+    form = ProductForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    product = Product.query.get(product_id)
+
+
+    if product is None:
+        return {'error': 'Product not found'}
+
+    if form.validate_on_submit() and product.owner_id == current_user.id:
+        product.name = form.data["name"]
+        product.description = form.data["description"]
+        product.price = form.data["price"]
+        product.preview_image = form.data["preview_image"]
+
+        db.session.commit()
+
+        return product.to_dict()
+    else:
+        errors = validation_errors_to_error_messages(form.errors)
+        return {'errors': errors}, 400
