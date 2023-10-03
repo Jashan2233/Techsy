@@ -42,6 +42,7 @@ def get_single_product(product_id):
 
 #Create a new Product
 @product_routes.route('/create', methods=['POST'])
+@login_required
 def create_product():
     form = ProductForm()
     form['csrf_token'].data = request.cookies["csrf_token"]
@@ -66,6 +67,7 @@ def create_product():
 
 #Edit product based on its ID
 @product_routes.route('/<int:product_id>', methods=['PUT'])
+@login_required
 def edit_product(product_id):
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -84,6 +86,27 @@ def edit_product(product_id):
         db.session.commit()
 
         return product.to_dict()
+    else:
+        errors = validation_errors_to_error_messages(form.errors)
+        return {'errors': errors}, 400
+
+
+
+#Delete a Product  based on its ID
+@product_routes.route('/<int:product_id>', methods=['DELETE'])
+@login_required
+def delete_product(product_id):
+    product = Product.query.get(product_id)
+
+    if not product:
+        return {"message": "product not found"}, 404
+
+    if product.owner_id == current_user.id:
+        db.session.delete(product)
+        db.session.commit()
+        return { "message": "Product successfully deleted" }
+    elif product.owner_id != current_user.id:
+        return { "message": "Must be product owner to delete" }, 400
     else:
         errors = validation_errors_to_error_messages(form.errors)
         return {'errors': errors}, 400
