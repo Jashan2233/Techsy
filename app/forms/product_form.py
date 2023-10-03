@@ -7,6 +7,6 @@ from wtforms.validators import DataRequired, NumberRange, Length
 class ProductForm(FlaskForm):
     name= StringField('Name', validators=[DataRequired(), Length(min=4, max=50)])
     description = StringField('Description', validators=[DataRequired(), Length(min=10, max=100)])
-    price = IntegerField('Price', validators=[DataRequired(), Length(min=1, max=5)])
-    preview_image = FileField('Image File', validators=[DataRequired()])
+    price = IntegerField('Price', validators=[DataRequired()])
+    preview_image = StringField('Image File', validators=[DataRequired()])
     submit = SubmitField('Submit')

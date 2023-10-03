@@ -1,7 +1,8 @@
 from flask import Blueprint, session, request
-from flask_login import login_required
+from .auth_routes import validation_errors_to_error_messages
+from flask_login import login_required, current_user
 from app.models import Product,User, db
-from app.forms import product_form
+from app.forms.product_form import ProductForm
 from datetime import date
 
 product_routes= Blueprint('products', __name__)
@@ -38,3 +39,26 @@ def get_single_product(product_id):
     product['owner_info'] = product_owner['username']
 
     return product
+
+#Create a new Product
+@product_routes.route('/create', methods=['POST'])
+def create_product():
+    form = ProductForm()
+    form['csrf_token'].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        new_product = Product(
+            owner_id = current_user.id,
+            name = form.data['name'],
+            description = form.data['description'],
+            price = form.data['price'],
+            preview_image = form.data['preview_image'],
+            created_at = date.today(),
+            updated_at = date.today()
+        )
+        db.session.add(new_product)
+        db.session.commit()
+        return new_product.to_dict()
+    else:
+        errors = validation_errors_to_error_messages(form.errors)
+        return {'errors': errors}, 400
