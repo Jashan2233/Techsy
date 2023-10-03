@@ -1,38 +1,56 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import React from "react";
-import { getAllProductsThunk } from "../../store/products";
+import { getAllProductsThunk, thunkGetAllProducts } from "../../store/products";
 import { NavLink } from "react-router-dom";
+import "./products.css";
 
-const Products = () => {
+const GetAllProducts = () => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products.allProducts);
-  const sessionUser = useSelector((state) => state.session.user);
   const products = Object.values(allProducts);
+  const sessionUser = useSelector((state) => state.session.user);
+  // console.log('SESSIONUSERHERE!:', sessionUser)
 
   useEffect(() => {
     dispatch(getAllProductsThunk());
-  }, []);
+  }, [dispatch]);
+
+  const welcomeText = () => {
+    if (sessionUser) {
+      return `Welcome back, ${sessionUser.username}!`;
+    } else {
+      return "Welcome to Techsy!";
+    }
+  };
 
   return (
     <>
-      <div className="welcome-container">
-        Welcome Back!, {sessionUser.username}
+      <div className="logo">
+        <img src="./images/logo.png"></img>
       </div>
-      <div className="products-container">
-        {products.map((product) => (
-          <div className="products-cards" key={product.id}>
-            <img className="product-images" src={product.preview_image} />
-            <div className="all-products-price-container">
-              <div className="all-products-price">
-                ${`${product.price.toFixed(2)}`}
+      <div className="welcome-back">{welcomeText()}</div>
+      <div className="all-products-container">
+        {products.map((product) => {
+          return (
+            <div key={product.id} className="all-products-card">
+              <div>
+                <img
+                  src={product.preview_image}
+                  alt={`${product.name}'s unavaiable`}
+                  className="all-products-image"
+                ></img>
+                <div class="all-products-price-container">
+                  <div className="all-products-price">
+                    ${`${product.price.toFixed(2)}`}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );
 };
-
-export default Products;
+export default GetAllProducts;
