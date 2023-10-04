@@ -3,6 +3,7 @@ from .auth_routes import validation_errors_to_error_messages
 from flask_login import login_required, current_user
 from app.models import Product,User, db
 from app.forms.product_form import ProductForm
+from .aws_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 from datetime import date
 
 product_routes= Blueprint('products', __name__)
@@ -47,13 +48,19 @@ def create_product():
     form = ProductForm()
     form['csrf_token'].data = request.cookies["csrf_token"]
 
+    #AWS Image Handling
+    image = form.data['preview_image']
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+
     if form.validate_on_submit():
         new_product = Product(
             owner_id = current_user.id,
             name = form.data['name'],
             description = form.data['description'],
             price = form.data['price'],
-            preview_image = form.data['preview_image'],
+            preview_image = upload['url'],
             created_at = date.today(),
             updated_at = date.today()
         )
