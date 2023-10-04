@@ -72,6 +72,19 @@ export const createProductThunk = () => async (dispatch) => {
 };
 
 // Edit a product
+export const editOwnedProductThunk =
+  (product, product_id) => async (dispatch) => {
+    const res = await fetch(`/api/products/${product_id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(product),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(editOwnedProduct(data));
+      return data;
+    }
+  };
 
 // Initial State of all Products, ownedProducts and SingleProducts
 const initialState = { allProducts: {}, ownedProducts: {}, singleProduct: {} };
