@@ -132,6 +132,21 @@ const allProductsReducer = (state = initialState, action) => {
       newState.allProducts[action.product.id] = action.product;
       return newState;
     }
+    case DELETE_OWNED_PRODUCT: {
+      const newState = { ...state, allProducts: { ...state.allProducts } };
+      delete newState.allProducts[action.productId];
+      return newState;
+    }
+    case GET_OWNED_PRODUCTS: {
+      const newState = { ...state };
+      newState.ownedProducts = action.products;
+      return newState;
+    }
+    case EDIT_OWNED_PRODUCTS: {
+      const newState = { ...state };
+      newState.allProducts[action.products.id] = action.products;
+      return newState;
+    }
     default:
       return state;
   }
