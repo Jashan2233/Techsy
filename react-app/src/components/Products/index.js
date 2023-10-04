@@ -25,9 +25,9 @@ const GetAllProducts = () => {
 
   return (
     <>
-      <div className="logo">
+      {/* <div className="logo">
         <img src="./images/logo.png"></img>
-      </div>
+      </div> */}
       <div className="welcome-back">{welcomeText()}</div>
       <div className="all-products-container">
         {products.map((product) => {

@@ -59,7 +59,7 @@ export const getSingleProductThunk = (product_id) => async (dispatch) => {
 };
 
 // Create Product
-export const createProductThunk = () => async (dispatch) => {
+export const createProductThunk = (product) => async (dispatch) => {
   const res = await fetch("/api/products/create", {
     method: "POST",
     body: product,
@@ -117,6 +117,11 @@ const allProductsReducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS: {
       const newState = { ...state };
       newState.allProducts = action.products;
+      return newState;
+    }
+    case GET_PRODUCT: {
+      const newState = { ...state, allProducts: { ...state.allProducts } };
+      newState.singleProduct = action.id;
       return newState;
     }
     default:
