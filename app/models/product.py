@@ -10,8 +10,8 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
     preview_image = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)

@@ -13,7 +13,7 @@ class Shop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')))
-    name = db.Column(db.String(50), nullable=False, unique=True)
+    name = db.Column(db.String(255), nullable=False, unique=True)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 

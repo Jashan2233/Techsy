@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d2171c368340
+Revision ID: 822de5bda86b
 Revises:
-Create Date: 2023-10-03 14:59:50.572953
+Create Date: 2023-10-04 10:22:06.193122
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = 'd2171c368340'
+revision = '822de5bda86b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,8 +34,8 @@ def upgrade():
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('description', sa.String(length=100), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
     sa.Column('preview_image', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -46,7 +47,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=50), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
