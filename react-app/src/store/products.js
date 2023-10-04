@@ -17,7 +17,7 @@ export const getProduct = (productId) => ({
   productId,
 });
 
-export const createProduct = (product) => ({
+export const createNewProduct = (product) => ({
   type: CREATE_NEW_PRODUCT,
   product,
 });
@@ -66,12 +66,21 @@ export const createProductThunk = () => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
-    dispatch(createProduct(data));
+    dispatch(createNewProduct(data));
     return data;
   }
 };
 
-// Edit a product
+//Get Owned Products by User
+export const getOwnedProductsThunk = () => async (dispatch) => {
+  const res = await fetch("/api/products/current");
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getOwnedProducts(data));
+  }
+};
+
+// Edit a product owned by User
 export const editOwnedProductThunk =
   (product, product_id) => async (dispatch) => {
     const res = await fetch(`/api/products/${product_id}`, {
