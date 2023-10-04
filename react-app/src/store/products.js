@@ -37,7 +37,8 @@ export const editOwnedProduct = (products) => ({
   products,
 });
 
-// Thunks
+// THUNKS
+
 export const getAllProductsThunk = () => async (dispatch) => {
   const res = await fetch("/api/products");
   if (res.ok) {
@@ -47,7 +48,27 @@ export const getAllProductsThunk = () => async (dispatch) => {
   }
 };
 
-const initialState = { allProducts: {}, userProducts: {}, singleProduct: {} };
+//Get Single Product
+
+// export const getSingleProductThunk = ()
+
+// Create Product
+export const createProductThunk = () => async (dispatch) => {
+  const res = await fetch("/api/products/create", {
+    method: "POST",
+    body: product,
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(createProduct(data));
+    return data;
+  }
+};
+
+// Edit a product
+
+// Initial State of all Products, ownedProducts and SingleProducts
+const initialState = { allProducts: {}, ownedProducts: {}, singleProduct: {} };
 
 //Reducer
 

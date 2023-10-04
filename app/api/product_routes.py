@@ -110,3 +110,13 @@ def delete_product(product_id):
     else:
         errors = validation_errors_to_error_messages(form.errors)
         return {'errors': errors}, 400
+
+
+#Get all Products that belong to a user(shop)
+@product_routes.route('/current')
+@login_required
+def get_owned_products():
+
+    owner_id = current_user.id
+    products = Product.query.filter_by(owner_id=owner_id).all()
+    return {"Products": [product.to_dict() for product in products]}
