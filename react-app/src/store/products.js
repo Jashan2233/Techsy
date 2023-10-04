@@ -39,6 +39,7 @@ export const editOwnedProduct = (products) => ({
 
 // THUNKS
 
+//Get all Products
 export const getAllProductsThunk = () => async (dispatch) => {
   const res = await fetch("/api/products");
   if (res.ok) {
@@ -49,8 +50,13 @@ export const getAllProductsThunk = () => async (dispatch) => {
 };
 
 //Get Single Product
-
-// export const getSingleProductThunk = ()
+export const getSingleProductThunk = (product_id) => async (dispatch) => {
+  const res = await fetch(`/api/products/${product_id}`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getProduct(data));
+  }
+};
 
 // Create Product
 export const createProductThunk = () => async (dispatch) => {
