@@ -6,6 +6,7 @@ import { getSingleProductThunk } from "../../store/products";
 
 const EditProduct = () => {
   const { product_id } = useParams();
+  console.log("productid in comp", product_id);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -43,11 +44,14 @@ const EditProduct = () => {
     }
 
     const editedProduct = await dispatch(
-      productStore.editOwnedProductThunk({
-        name,
-        description,
-        price,
-      })
+      productStore.editOwnedProductThunk(
+        {
+          name,
+          description,
+          price,
+        },
+        product_id
+      )
     );
 
     if (editedProduct) {

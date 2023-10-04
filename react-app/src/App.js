@@ -8,6 +8,7 @@ import CreateProduct from "./components/CreateProductForm";
 import EditProduct from "./components/EditProductForm";
 import Navigation from "./components/Navigation";
 import Products from "./components/Products";
+import DeleteProduct from "./components/DeleteProductModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
           </Route>
           <Route path="/products/:product_id/edit">
             <EditProduct />
+            <DeleteProduct />
           </Route>
           <Route path="/products">
             <Products />
