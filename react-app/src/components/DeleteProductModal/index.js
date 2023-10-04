@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../store/products";
 import { useModal } from "../../context/Modal";
+import { useHistory, useParams } from "react-router-dom";
 import * as productActions from "../../store/products";
 
-const DeleteProduct = ({ product_id }) => {
+const DeleteProduct = () => {
   const dispatch = useDispatch();
+  const { product_id } = useParams();
 
   const { closeModal } = useModal();
-  // console.log('PRODUCTID', productId)
   const handleSubmit = () => {
     dispatch(productActions.deleteOwnedProductThunk(product_id));
     closeModal();

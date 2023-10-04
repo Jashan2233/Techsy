@@ -22,9 +22,9 @@ export const createNewProduct = (product) => ({
   product,
 });
 
-export const deleteOwnedProduct = (productId) => ({
+export const deleteOwnedProduct = (product_id) => ({
   type: DELETE_OWNED_PRODUCT,
-  productId,
+  product_id,
 });
 
 export const getOwnedProducts = (products) => ({
@@ -106,13 +106,16 @@ export const editOwnedProductThunk =
 
 // Delete own Product
 export const deleteOwnedProductThunk = (product_id) => async (dispatch) => {
+  console.log("delete ID", product_id);
   const res = await fetch(`/api/products/${product_id}`, {
     method: "DELETE",
   });
   if (res.ok) {
     const data = await res.json();
-    dispatch(deleteOwnedProduct(data));
+    dispatch(deleteOwnedProduct(product_id));
     return data;
+  } else {
+    console.log("errors in delete");
   }
 };
 
