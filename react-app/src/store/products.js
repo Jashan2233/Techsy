@@ -3,7 +3,7 @@ const GET_OWNED_PRODUCTS = "products/GET_USER_PRODUCTS";
 const EDIT_OWNED_PRODUCTS = "products/EDIT_USER_PRODUCTS";
 const GET_PRODUCT = "product/GET_PRODUCT";
 const CREATE_NEW_PRODUCT = "products/CREATE_A_PRODUCT";
-const DELETE_PRODUCT = "products/DELETE_A_PRODUCT";
+const DELETE_OWNED_PRODUCT = "products/DELETE_A_PRODUCT";
 
 // Action
 
@@ -22,8 +22,8 @@ export const createNewProduct = (product) => ({
   product,
 });
 
-export const deleteProduct = (productId) => ({
-  type: DELETE_PRODUCT,
+export const deleteOwnedProduct = (productId) => ({
+  type: DELETE_OWNED_PRODUCT,
   productId,
 });
 
@@ -94,6 +94,18 @@ export const editOwnedProductThunk =
       return data;
     }
   };
+
+// Delete own Product
+export const deleteOwnedProductThunk = (product_id) => async (dispatch) => {
+  const res = await fetch(`/api/products/${product_id}`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(deleteOwnedProduct(data));
+    return data;
+  }
+};
 
 // Initial State of all Products, ownedProducts and SingleProducts
 const initialState = { allProducts: {}, ownedProducts: {}, singleProduct: {} };
