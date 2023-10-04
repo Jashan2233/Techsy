@@ -89,7 +89,6 @@ def edit_product(product_id):
         product.name = form.data["name"]
         product.description = form.data["description"]
         product.price = form.data["price"]
-        product.preview_image = form.data["preview_image"]
 
         db.session.commit()
 

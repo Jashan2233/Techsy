@@ -5,6 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import CreateProduct from "./components/CreateProductForm";
+import EditProduct from "./components/EditProductForm";
 import Navigation from "./components/Navigation";
 import Products from "./components/Products";
 
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/products/create">
             <CreateProduct />
+          </Route>
+          <Route path="/products/:product_id/edit">
+            <EditProduct />
           </Route>
           <Route path="/products">
             <Products />

@@ -84,19 +84,27 @@ export const getOwnedProductsThunk = () => async (dispatch) => {
 };
 
 // Edit a product owned by User
-export const editOwnedProductThunk =
-  (product, product_id) => async (dispatch) => {
-    const res = await fetch(`/api/products/${product_id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(product),
-    });
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(editOwnedProduct(data));
-      return data;
-    }
-  };
+export const editOwnedProductThunk = (product) => async (dispatch) => {
+  const { name, description, price, product_id } = product;
+  console.log("productid", product_id);
+  const response = await fetch(`/api/products/${product_id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name,
+      description,
+      price,
+    }),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data, "Data here!!");
+    dispatch(editOwnedProduct(data));
+    return data;
+  } else {
+    console.log("Errors!!!!!!!");
+  }
+};
 
 // Delete own Product
 export const deleteOwnedProductThunk = (product_id) => async (dispatch) => {

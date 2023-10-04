@@ -39,7 +39,7 @@ const GetAllProducts = () => {
                 ></img>
                 <div class="all-products-price-container">
                   <div className="all-products-price">
-                    ${`${product.price.toFixed(2)}`}
+                    ${`${product.price}`}
                   </div>
                 </div>
               </div>
