@@ -45,6 +45,7 @@ def get_single_product(product_id):
 @product_routes.route('/create', methods=['POST'])
 @login_required
 def create_product():
+    print('hitted the post!')
     form = ProductForm()
     form['csrf_token'].data = request.cookies["csrf_token"]
 

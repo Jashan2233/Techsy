@@ -7,7 +7,7 @@ import {
 } from "../../store/products";
 import { getAllProductsThunk } from "../../store/products";
 
-const createProduct = () => {
+const CreateProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [name, setName] = useState("");
@@ -30,6 +30,8 @@ const createProduct = () => {
     newProduct.append("description", description);
     newProduct.append("price", price);
     newProduct.append("preview_image", preview_image);
+
+    console.log("name", name);
 
     //Dispatch Thunk
     const createdProduct = await dispatch(createProductThunk(newProduct));
@@ -140,3 +142,5 @@ const createProduct = () => {
     </div>
   );
 };
+
+export default CreateProduct;

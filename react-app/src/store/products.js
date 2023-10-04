@@ -66,8 +66,11 @@ export const createProductThunk = (product) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
+    console.log("data is here", data);
     dispatch(createNewProduct(data));
     return data;
+  } else {
+    console.log("FAT error!!");
   }
 };
 
@@ -122,6 +125,11 @@ const allProductsReducer = (state = initialState, action) => {
     case GET_PRODUCT: {
       const newState = { ...state, allProducts: { ...state.allProducts } };
       newState.singleProduct = action.id;
+      return newState;
+    }
+    case CREATE_NEW_PRODUCT: {
+      const newState = { ...state, allProducts: { ...state.allProducts } };
+      newState.allProducts[action.product.id] = action.product;
       return newState;
     }
     default:
