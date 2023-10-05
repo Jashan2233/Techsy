@@ -21,6 +21,7 @@ class Product(db.Model):
     #Relationships
     users = db.relationship("User", back_populates="products")
     shop_products = db.relationship("Shop", back_populates="products_shop")
+    review_product = db.relationship("Review", cascade="all, delete-orphan", back_populates="product_review")
 
 
 
