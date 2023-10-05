@@ -6,12 +6,21 @@ import * as productActions from "../../store/products";
 
 const DeleteProduct = () => {
   const dispatch = useDispatch();
+  const history = useDispatch();
   const { product_id } = useParams();
 
   const { closeModal } = useModal();
-  const handleSubmit = () => {
-    dispatch(productActions.deleteOwnedProductThunk(product_id));
-    closeModal();
+
+  const handleSubmit = async () => {
+    const deletedSuccess = await dispatch(
+      productActions.deleteOwnedProductThunk(product_id)
+    );
+    if (deletedSuccess) {
+      // Product deleted successfully, navigate to "/products"
+      history.push("/products");
+    } else {
+      console.log("Delete failed!");
+    }
   };
 
   return (
