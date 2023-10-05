@@ -9,7 +9,7 @@ export const actionGetCurrUserShop = (shops) => {
 };
 
 export const fetchCurrUserShops = () => async (dispatch) => {
-  const response = await fetch("/api/shops/");
+  const response = await fetch("/api/shops");
 
   if (response.ok) {
     const shops = await response.json();

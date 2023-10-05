@@ -9,6 +9,7 @@ import EditProduct from "./components/EditProductForm";
 import Navigation from "./components/Navigation";
 import Products from "./components/Products";
 import DeleteProduct from "./components/DeleteProductModal";
+import Shop from "./components/Shop";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <LoginFormPage />
+          </Route>
+          <Route exact path="/shops/current">
+            <Shop />
           </Route>
           <Route path="/products/create">
             <CreateProduct />
