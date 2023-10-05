@@ -1,5 +1,13 @@
 .profile-dropdown {
   position: absolute;
+  right: 13.5em;
+  margin-top: .55em;
+  z-index: 1;
+  background-color: white;
+  width: 8em;
+  border: 1px solid black;
+  border-radius: 10px;
+  /* display: inline-block; */
 }
 
 .hidden {

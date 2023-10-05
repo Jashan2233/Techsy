@@ -36,7 +36,7 @@ function App() {
             <EditProduct />
             <DeleteProduct />
           </Route>
-          <Route path="/products">
+          <Route path="/">
             <Products />
           </Route>
           <Route path="/signup">
