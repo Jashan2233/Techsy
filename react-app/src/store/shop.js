@@ -13,9 +13,8 @@ export const fetchCurrUserShops = () => async (dispatch) => {
 
   if (response.ok) {
     const shops = await response.json();
-    const normalizedShops = normalizeAllShops(shops);
-    dispatch(actionGetCurrUserShop(normalizedShops));
-    return normalizedShops;
+    dispatch(actionGetCurrUserShop(shops));
+    return shops;
   }
 };
 
