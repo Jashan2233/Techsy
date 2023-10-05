@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
           className="store-button"
           data-tooltip="Shop Manager"
         >
-          <i className="fa-solid fa-store" id="shop-icon"></i>
+          <i className="fa-solid fa-store"></i>
         </NavLink>
       );
     }

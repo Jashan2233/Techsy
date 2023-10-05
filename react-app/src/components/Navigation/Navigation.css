@@ -13,3 +13,16 @@
 .hidden {
   display: none;
 }
+
+.store-button{
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.home-link {
+  text-decoration: none;
+  padding: 20px;
+}

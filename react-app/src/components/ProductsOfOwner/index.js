@@ -10,15 +10,12 @@ const ProductsOfOwner = () => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products.ownedProducts);
-  console.log("products state", products);
 
   const allProducts = useSelector((state) => state.products.allProducts);
 
   const productsArr = Object.values(products);
-  console.log("productsarray", productsArr[0]);
 
   const ownedProductsArray = productsArr[0];
-  console.log("owned array", ownedProductsArray);
 
   useEffect(() => {
     dispatch(productActions.getOwnedProductsThunk());

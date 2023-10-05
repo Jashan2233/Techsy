@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as shopActions from "../../store/shop";
 import ProductsOfOwner from "../ProductsOfOwner";
@@ -11,7 +11,6 @@ const Shop = () => {
   const history = useHistory();
 
   const shop = useSelector((state) => state.shops);
-  console.log("this is shop!", shop);
 
   const handleMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
@@ -34,6 +33,11 @@ const Shop = () => {
           <i class="fa-solid fa-shop"></i>
           Store
         </h3>
+        <div>
+          <NavLink className="home-link" to="/products">
+            HOME
+          </NavLink>
+        </div>
       </div>
       <div className="content-panel">
         {selectedMenuItem === "post" && (
