@@ -1,0 +1,70 @@
+.manage-shop-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    padding: 1rem 10em;
+  }
+
+  .menu-panel {
+    border: 1px solid rgb(182, 180, 180);
+    width: 25%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Guardian-EgypTT", Charter, "Charter Bitstream", Cambria, "Noto Serif Light", "Droid Serif", Georgia, serif;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+  }
+
+  .content-panel {
+    border: 1px solid rgb(182, 180, 180);
+    width: 75%;
+    padding: 1rem;
+    font-family: "Guardian-EgypTT", Charter, "Charter Bitstream", Cambria, "Noto Serif Light", "Droid Serif", Georgia, serif;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+  }
+
+  .content-panel-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .shop-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .shop-title:hover {
+    cursor: pointer;
+  }
+
+  .create-new-product-button {
+    border: 2px solid black;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .create-new-product-button:hover {
+    text-decoration: none;
+    color: black;
+    background-color: rgb(89, 167, 163);
+  }
+
+  .your-review-button:hover {
+    cursor: pointer;
+  }
+
+  .your-account-text {
+    text-decoration: underline;
+  }

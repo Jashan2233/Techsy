@@ -7,6 +7,8 @@ import {
 } from "../../store/products";
 import { getAllProductsThunk } from "../../store/products";
 
+import "./CreateForm.css";
+
 const CreateProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();

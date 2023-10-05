@@ -66,11 +66,8 @@ export const createProductThunk = (product) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
-    console.log("data is here", data);
     dispatch(createNewProduct(data));
     return data;
-  } else {
-    console.log("FAT error!!");
   }
 };
 
@@ -79,6 +76,7 @@ export const getOwnedProductsThunk = () => async (dispatch) => {
   const res = await fetch("/api/products/current");
   if (res.ok) {
     const data = await res.json();
+    console.log("got products of owner", data);
     dispatch(getOwnedProducts(data));
   }
 };
@@ -98,7 +96,6 @@ export const editOwnedProductThunk =
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data, "Data here!!");
       dispatch(editOwnedProduct(data));
       return data;
     }
@@ -114,8 +111,6 @@ export const deleteOwnedProductThunk = (product_id) => async (dispatch) => {
     const data = await res.json();
     dispatch(deleteOwnedProduct(product_id));
     return data;
-  } else {
-    console.log("errors in delete");
   }
 };
 
