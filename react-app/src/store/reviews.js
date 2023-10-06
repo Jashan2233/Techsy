@@ -59,7 +59,10 @@ export const thunkCreateProductReview =
 
     if (response.ok) {
       const new_review = await response.json();
+      console.log("HITTED CREATE REVIEW!", new_review);
       dispatch(actionCreateProductReview(new_review));
+    } else {
+      console.log("errors in create review!!");
     }
   };
 

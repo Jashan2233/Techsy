@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import * as productActions from "../../store/products";
 import * as reviewActions from "../../store/reviews";
 import "./SingleProduct.css";
+import OpenModalButton from "../OpenModalButton";
+import CreateReviewModal from "../CreateReviewModal";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
@@ -11,6 +13,7 @@ const SingleProduct = () => {
   const product = useSelector(
     (state) => state.products.allProducts[product_id - 1]
   );
+  const new_review = useSelector((state) => state.reviews.newReview);
   const user = useSelector((state) => state.session.user);
   const reviews = Object.values(
     useSelector((state) => state.reviews.productReviews)
@@ -27,16 +30,33 @@ const SingleProduct = () => {
 
   const totalReviews = reviews.length;
 
+  let userReview;
+
+  if (user) {
+    userReview = reviews.find((review) => review.user_id === user?.id);
+  }
+
   useEffect(() => {
     dispatch(productActions.getSingleProductThunk(product_id));
     dispatch(reviewActions.thunkGetProductReviews(product_id));
     dispatch(productActions.getAllProductsThunk());
-  }, [dispatch, product_id]);
+  }, [dispatch, product_id, new_review]);
 
   if (!product || !reviews) return null;
 
   return (
     <>
+      {/* {!userReview && user?.id !== product?.owner_id && ( */}
+      <div className="post-review-button">
+        <OpenModalButton
+          buttonText="Post Your Review"
+          modalComponent={<CreateReviewModal product_id={product_id} />}
+        />
+        {!reviews.length && !userReview && user?.id !== product?.owner_id && (
+          <p id="be-first">Be the first to post a review!</p>
+        )}
+      </div>
+      {/* )} */}
       <div className="product-container">
         {product && (
           <div className="c-product-info-block">
