@@ -25,6 +25,8 @@ const SingleProduct = () => {
 
   // Helper functions:
 
+  const totalReviews = reviews.length;
+
   useEffect(() => {
     dispatch(productActions.getSingleProductThunk(product_id));
     dispatch(reviewActions.thunkGetProductReviews(product_id));
@@ -58,15 +60,19 @@ const SingleProduct = () => {
         )}
       </div>
       <div className="reviews-container">
+        <div className="total-reviews">Reviews: {totalReviews}</div>
+        <div className="average-rating">
+          {avg.toFixed(1)} <i className="fa-solid fa-star"></i>
+        </div>
         <div className="product-reviews">
           {reviews.reverse().map((review, index) => (
             <div className="reviews-details" key={index}>
-              <h3 className="review-name">{user?.username}</h3>
-              <div className="star-rating">
-                {[...Array(review.rating)].map((i) => (
+              <h3 className="review-name">
+                {user?.username} -{" "}
+                {Array.from({ length: Math.floor(review.rating) }, (_, i) => (
                   <i key={i} className="fa-solid fa-star"></i>
                 ))}
-              </div>
+              </h3>
               <h5>
                 {new Date(review.created_at).toLocaleString("default", {
                   month: "long",

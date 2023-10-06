@@ -37,3 +37,54 @@
 .c-product-owner {
     font-size: 20px;
 }
+
+/* CSS for Review Section */
+.reviews-container {
+    margin-top: 20px;
+  }
+
+  .total-reviews {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .average-rating {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .product-reviews {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+
+  .reviews-details {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .review-name {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .star-rating {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .review-date {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+  }
+
+  .review-text {
+    font-size: 16px;
+  }
