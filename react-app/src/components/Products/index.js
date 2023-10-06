@@ -1,7 +1,6 @@
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import React from "react";
-import { getAllProductsThunk, thunkGetAllProducts } from "../../store/products";
+import { getAllProductsThunk } from "../../store/products";
 import { NavLink } from "react-router-dom";
 import "./products.css";
 
@@ -31,17 +30,17 @@ const GetAllProducts = () => {
         {products.map((product) => {
           return (
             <div key={product.id} className="all-products-card">
-              <div>
+              <NavLink to={`/products/${product.id}`}>
+                {" "}
+                {/* Wrap the image with NavLink */}
                 <img
                   src={product.preview_image}
-                  alt={`${product.name}'s unavaiable`}
+                  alt={`${product.name}'s unavailable`}
                   className="all-products-image"
                 ></img>
-                <div class="all-products-price-container">
-                  <div className="all-products-price">
-                    ${`${product.price}`}
-                  </div>
-                </div>
+              </NavLink>
+              <div class="all-products-price-container">
+                <div className="all-products-price">${`${product.price}`}</div>
               </div>
             </div>
           );
@@ -50,4 +49,5 @@ const GetAllProducts = () => {
     </>
   );
 };
+
 export default GetAllProducts;
