@@ -53,8 +53,11 @@ export const getAllProductsThunk = () => async (dispatch) => {
 export const getSingleProductThunk = (product_id) => async (dispatch) => {
   const res = await fetch(`/api/products/${product_id}`);
   if (res.ok) {
+    console.log("hitted the thunk spot!!!");
     const data = await res.json();
     dispatch(getProduct(data));
+  } else {
+    console.log("Error in singlespot thunk!");
   }
 };
 

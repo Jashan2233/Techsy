@@ -10,6 +10,7 @@ import Navigation from "./components/Navigation";
 import Products from "./components/Products";
 import DeleteProduct from "./components/DeleteProductModal";
 import Shop from "./components/Shop";
+import SingleProduct from "./components/SingleProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <LoginFormPage />
+          </Route>
+          <Route exact path="/products/:product_id">
+            <SingleProduct />
           </Route>
           <Route exact path="/shops/current">
             <Shop />
