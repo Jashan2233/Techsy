@@ -7,6 +7,7 @@ import "./SingleProduct.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateReviewModal from "../CreateReviewModal";
 import DeleteReviewModal from "../DeleteReviewModal";
+import UpdateReview from "../UpdateReviewModal";
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const { product_id } = useParams();
@@ -109,8 +110,16 @@ const SingleProduct = () => {
                     <DeleteReviewModal  review_id={review.id} />
                   }
                 />
-              </div>
+                <div className="update-review">
+                  <OpenModalButton
+                    buttonText="Updated Review"
+                    modalComponent={
+                      <UpdateReview review_id={review.id}  />
+                    }
+                  />
 
+                </div>
+              </div>
             </div>
           ))}
         </div>
