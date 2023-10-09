@@ -27,14 +27,14 @@ function App() {
           <Route path="/login">
             <LoginFormPage />
           </Route>
+          <Route exact path="/products/create">
+            <CreateProduct />
+          </Route>
           <Route exact path="/products/:product_id">
             <SingleProduct />
           </Route>
           <Route exact path="/shops/current">
             <Shop />
-          </Route>
-          <Route path="/products/create">
-            <CreateProduct />
           </Route>
           <Route path="/products/:product_id/edit">
             <EditProduct />

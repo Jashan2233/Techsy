@@ -14,7 +14,7 @@ const EditProduct = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (product) {
@@ -34,12 +34,12 @@ const EditProduct = () => {
     e.preventDefault();
 
     let errorsObj = {};
-    if (!name.length) errorsObj.name = "Name is Required";
-    if (!price.length) errorsObj.price = "Please enter a valid price";
-    if (!description)
+    if (!name || !name.length) errorsObj.name = "Name is Required";
+    if (!price || !price.length) errorsObj.price = "Please enter a valid price";
+    if (!description || description.length < 30)
       errorsObj.description = "Please add a description for your product";
 
-    if (Object.keys(errorsObj).length) {
+    if (Object.keys(errorsObj).length !== 0) {
       return setErrors(errorsObj);
     }
 
@@ -60,24 +60,14 @@ const EditProduct = () => {
       console.log("EDIT FAILED");
     }
 
-    //Updating the Product
-    // const updatedProduct = await dispatch(
-    //   editOwnedProductThunk(editedProduct, product_id)
-    // );
-
-    // console.log("UPDATED PRODUCT!", updatedProduct);
-
-    // // await dispatch(getSingleProductThunk(updatedProduct.id));
-
-    // dispatch(getAllProductsThunk());
     history.push("/products");
   };
+
 
   return (
     <div className="edit-product-container">
       <h1 className="edit-product-header">Update Your Product</h1>
       <div className="edit-product-photo-form">
-        <img className="edit-product-photo" src={product.preview_image} />
         <form
           className="edit-product-form-container"
           method="POST"
