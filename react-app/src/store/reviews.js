@@ -66,14 +66,14 @@ export const thunkCreateProductReview =
     }
   };
 
-export const thunkDeleteReview = (reviewId) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/${reviewId}`, {
+export const thunkDeleteReview = (review_id) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${review_id}`, {
     method: "DELETE",
   });
 
   if (response.ok) {
-    dispatch(actionDeleteReview(reviewId));
-    return reviewId;
+    dispatch(actionDeleteReview(review_id));
+    return review_id;
   }
 };
 

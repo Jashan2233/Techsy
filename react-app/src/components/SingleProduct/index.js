@@ -6,7 +6,7 @@ import * as reviewActions from "../../store/reviews";
 import "./SingleProduct.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateReviewModal from "../CreateReviewModal";
-
+import DeleteReviewModal from "../DeleteReviewModal";
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const { product_id } = useParams();
@@ -14,6 +14,7 @@ const SingleProduct = () => {
     (state) => state.products.allProducts[product_id - 1]
   );
   const new_review = useSelector((state) => state.reviews.newReview);
+  const userReviews = useSelector((state) => state.reviews.userReviews)
   const user = useSelector((state) => state.session.user);
   const reviews = Object.values(
     useSelector((state) => state.reviews.productReviews)
@@ -40,22 +41,13 @@ const SingleProduct = () => {
     dispatch(productActions.getSingleProductThunk(product_id));
     dispatch(reviewActions.thunkGetProductReviews(product_id));
     dispatch(productActions.getAllProductsThunk());
-  }, [dispatch, product_id, new_review]);
+  }, [dispatch, product_id, new_review, userReviews]);
 
   if (!product || !reviews) return null;
 
   return (
     <>
       {/* {!userReview && user?.id !== product?.owner_id && ( */}
-      <div className="post-review-button">
-        <OpenModalButton
-          buttonText="Post Your Review"
-          modalComponent={<CreateReviewModal product_id={product_id} />}
-        />
-        {!reviews.length && !userReview && user?.id !== product?.owner_id && (
-          <p id="be-first">Be the first to post a review!</p>
-        )}
-      </div>
       {/* )} */}
       <div className="product-container">
         {product && (
@@ -93,6 +85,15 @@ const SingleProduct = () => {
                   <i key={i} className="fa-solid fa-star"></i>
                 ))}
               </h3>
+                <div className="post-review-button">
+                  <OpenModalButton
+                    buttonText="Post Your Review"
+                    modalComponent={<CreateReviewModal product_id={product_id} />}
+                  />
+                  {!reviews.length && !userReview && user?.id !== product?.owner_id && (
+                    <p id="be-first">Be the first to post a review!</p>
+                  )}
+                </div>
               <h5>
                 {new Date(review.created_at).toLocaleString("default", {
                   month: "long",
@@ -100,6 +101,16 @@ const SingleProduct = () => {
                 {new Date(review.created_at).getFullYear()}
               </h5>
               <h4>{review.review}</h4>
+
+              <div id="delete-review-home">
+                <OpenModalButton
+                  buttonText="Delete Review"
+                  modalComponent={
+                    <DeleteReviewModal  review_id={review.id} />
+                  }
+                />
+              </div>
+
             </div>
           ))}
         </div>
