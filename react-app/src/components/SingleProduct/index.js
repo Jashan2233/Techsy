@@ -65,6 +65,7 @@ const SingleProduct = () => {
                 <h1 className="single-product-name">{product.name}</h1>
                 <div className="c-product-owner">
                   Sold by {product.owner_info}
+                  <h3>{product.description}</h3>
                 </div>
               </div>
             </div>
