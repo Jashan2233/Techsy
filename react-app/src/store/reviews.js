@@ -22,7 +22,7 @@ export const actionCreateProductReview = (new_review) => ({
 
 export const actionDeleteReview = (reviewId) => ({
   type: DELETE_REVIEW,
-  reviewId,
+  reviewId, // Use the same key as in your reducer
 });
 
 export const actionUpdateUserReview = (updated_review) => ({
@@ -73,7 +73,6 @@ export const thunkDeleteReview = (review_id) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(actionDeleteReview(review_id));
-    return review_id;
   }
 };
 
@@ -105,9 +104,16 @@ const productReviewsReducer = (state = initialState, action) => {
       return { ...state, userReviews: action.user_reviews };
 
     case DELETE_REVIEW:
-      const { [action.reviewId]: deletedReview, ...restReviews } =
-        state.userReviews;
-      return { ...state, userReviews: restReviews, newReview: {} };
+      // Create new objects without the deleted review
+      console.log("STATEHERE", state)
+      const { [action.reviewId]: deletedReview, ...userReviews } = state.userReviews;
+      const { [action.reviewId]: deletedProductReview, ...productReviews } = state.productReviews;
+
+      return {
+        ...state,
+        userReviews,
+        productReviews,
+      };
 
     case UPDATE_USER_REVIEW:
       return {

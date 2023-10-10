@@ -26,3 +26,27 @@
   text-decoration: none;
   padding: 20px;
 }
+
+.nav {
+  display: flex;
+  list-style: none;
+  justify-content: right;
+  align-items: center;
+  margin: 20px;
+}
+.shop-link {
+  margin-right: 20px;
+
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  font-family: Roboto, sans-serif;
+}
+
+.logo-div {
+  font-size: 20px;
+  color: #ff6600;
+  text-shadow: 1px 1px 2px #333;
+}

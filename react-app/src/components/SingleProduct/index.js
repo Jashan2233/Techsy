@@ -40,8 +40,8 @@ const SingleProduct = () => {
   }
 
   useEffect(() => {
-    dispatch(productActions.getSingleProductThunk(product_id));
     dispatch(reviewActions.thunkGetProductReviews(product_id));
+    dispatch(productActions.getSingleProductThunk(product_id));
     dispatch(productActions.getAllProductsThunk());
   }, [dispatch, product_id, new_review, userReviews]);
 

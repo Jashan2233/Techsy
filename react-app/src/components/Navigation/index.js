@@ -24,19 +24,19 @@ function Navigation({ isLoaded }) {
   };
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          Home
-        </NavLink>
-      </li>
-      <li> {shopButton()}</li>
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
-      )}
-    </ul>
+    <div className="top-nav">
+      <div className="logo-div">
+        <h1 className="logo-schrift">TECHSY</h1>
+      </div>
+      <ul className="nav">
+        <li className="shop-link"> {shopButton()}</li>
+        {isLoaded && (
+          <li>
+            <ProfileButton user={sessionUser} />
+          </li>
+        )}
+      </ul>
+    </div>
   );
 }
 

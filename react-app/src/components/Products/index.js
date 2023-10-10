@@ -24,7 +24,6 @@ const GetAllProducts = () => {
 
   return (
     <>
-      <h1>LOGO PLACEHOLDER</h1>
       <div className="welcome-back">{welcomeText()}</div>
       <div className="all-products-container">
         {products.map((product) => {
@@ -39,7 +38,7 @@ const GetAllProducts = () => {
                   className="all-products-image"
                 ></img>
               </NavLink>
-              <div class="all-products-price-container">
+              <div className="all-products-price-container">
                 <div className="all-products-price">${`${product.price}`}</div>
               </div>
             </div>

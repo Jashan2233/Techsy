@@ -1,70 +1,78 @@
+/* shop.css */
 .manage-shop-container {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    padding: 1rem 10em;
-  }
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
 
-  .menu-panel {
-    border: 1px solid rgb(182, 180, 180);
-    width: 25%;
-    height: 100%;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Guardian-EgypTT", Charter, "Charter Bitstream", Cambria, "Noto Serif Light", "Droid Serif", Georgia, serif;
-    letter-spacing: 0.5px;
-    font-weight: 300;
-  }
+.menu-panel {
+  width: 20%;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+}
 
-  .content-panel {
-    border: 1px solid rgb(182, 180, 180);
-    width: 75%;
-    padding: 1rem;
-    font-family: "Guardian-EgypTT", Charter, "Charter Bitstream", Cambria, "Noto Serif Light", "Droid Serif", Georgia, serif;
-    letter-spacing: 0.5px;
-    font-weight: 300;
-  }
+.your-account-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ff6600;
+}
 
-  .content-panel-header {
-    display: flex;
-    justify-content: space-between;
-  }
+.shop-title {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin: 15px 0;
+  cursor: pointer;
+  color: #333;
+}
 
-  .shop-title {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-  }
+.shop-title i {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #ff6600;
+}
 
-  .shop-title:hover {
-    cursor: pointer;
-  }
+.shop-title:hover {
+  color: #ff6600;
+}
 
-  .create-new-product-button {
-    border: 2px solid black;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    cursor: pointer;
-    font-size: 18px;
-  }
+.home-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 10px 0;
+  display: block;
+}
 
-  .create-new-product-button:hover {
-    text-decoration: none;
-    color: black;
-    background-color: rgb(89, 167, 163);
-  }
+.content-panel {
+  flex: 1;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+}
 
-  .your-review-button:hover {
-    cursor: pointer;
-  }
+.content-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .your-account-text {
-    text-decoration: underline;
-  }
+.create-new-product-button {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-new-product-button:hover {
+  background-color: #ff5500;
+}
+
+/* Style ProductsOfOwner component as needed */

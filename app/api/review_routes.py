@@ -56,19 +56,19 @@ def create_review(product_id):
         return {'message': 'You are the owner!!!'}
 
 
-#Delete Review based on review_id
+# Delete Review based on review_id
 @review_routes.route('/<int:review_id>', methods=['DELETE'])
 @login_required
 def delete_review(review_id):
     review = Review.query.get(review_id)
 
     if not review:
-        return {'error': 'review not found'}
+        return {'error': 'Review not found'}
 
     db.session.delete(review)
     db.session.commit()
 
-    return {'Review Successfully Deleted!!!'}
+    return {'message': 'Review Successfully Deleted!!!'}
 
 
 #Edit route based on review_id

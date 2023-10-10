@@ -16,7 +16,7 @@ const CreateProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [preview_image, setPreview_image] = useState("");
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState({}); // Initialize errors as an object
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +25,16 @@ const CreateProduct = () => {
     if (!name.length) errorsObj.name = "Name is Required";
     if (!price.length || price < 5)
       errorsObj.price = "Please enter a valid price";
+    if(!description.length) errorsObj.description = "Please add a description for the product!"
     if (!preview_image) errorsObj.preview_image = "Image is required!";
+
+    // Set the errors state
+    setErrors(errorsObj);
+
+    // If there are errors, don't proceed with form submission
+    if (Object.keys(errorsObj).length > 0) {
+      return;
+    }
 
     const newProduct = new FormData();
     newProduct.append("name", name);
@@ -35,7 +44,7 @@ const CreateProduct = () => {
 
     console.log("name", name);
 
-    //Dispatch Thunk
+    // Dispatch Thunk
     const createdProduct = await dispatch(createProductThunk(newProduct));
     dispatch(getAllProductsThunk());
     if (createdProduct) {
