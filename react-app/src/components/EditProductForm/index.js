@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as productStore from "../../store/products";
 import { getSingleProductThunk } from "../../store/products";
-
+import "./EditProductForm.css";
 const EditProduct = () => {
   const { product_id } = useParams();
   console.log("productid in comp", product_id);
@@ -62,7 +62,6 @@ const EditProduct = () => {
 
     history.push("/products");
   };
-
 
   return (
     <div className="edit-product-container">
