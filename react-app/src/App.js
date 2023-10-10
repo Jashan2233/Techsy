@@ -38,7 +38,6 @@ function App() {
           </Route>
           <Route path="/products/:product_id/edit">
             <EditProduct />
-            <DeleteProduct />
           </Route>
           <Route path="/">
             <Products />

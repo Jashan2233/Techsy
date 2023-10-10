@@ -89,16 +89,12 @@ const SingleProduct = () => {
                 <div id="delete-review-home">
                   <OpenModalButton
                     buttonText="Delete Review"
-                    modalComponent={
-                      <DeleteReviewModal review_id={review.id} />
-                    }
+                    modalComponent={<DeleteReviewModal review_id={review.id} />}
                   />
                   <div className="update-review">
                     <OpenModalButton
                       buttonText="Edit Review"
-                      modalComponent={
-                        <UpdateReview review_id={review.id} />
-                      }
+                      modalComponent={<UpdateReview review_id={review.id} />}
                     />
                   </div>
                 </div>

@@ -39,6 +39,10 @@ const ProductsOfOwner = () => {
                   alt={`Product: ${product.name}`}
                 />
                 <h2 className="store-product-name">{product.name}</h2>
+                <h4 className="store-product-price">
+                  {" "}
+                  Actual Price: ${product.price}
+                </h4>
               </NavLink>
               <Link to={`/products/${product.id}`}>
                 <div className="product-edit-delete">
