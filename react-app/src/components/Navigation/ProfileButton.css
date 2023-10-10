@@ -1,0 +1,60 @@
+/* ProfileButton.css */
+
+.profile-button-container {
+    position: relative;
+  }
+
+  /* .profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    z-index: 2;
+    text-align: left;
+  } */
+
+  .profile-dropdown.hidden {
+    display: none;
+  }
+
+  .user-info li {
+    margin: 5px 0;
+    padding: 5px;
+    list-style: none;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .user-info li:last-child {
+    border-bottom: none;
+  }
+
+  .button-style {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    margin: 5px 0;
+    font-weight: bold;
+  }
+
+  .button-style:hover {
+    background-color: #ff5500;
+  }
+
+  /* You can adjust the colors and styles as needed to match the Etsy style you desire. */

@@ -10,8 +10,6 @@ const Shop = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const shop = useSelector((state) => state.shops);
-
   const handleMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
   };

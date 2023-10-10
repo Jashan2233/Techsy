@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import * as productActions from "../../store/products";
 import DeleteProductModal from "../DeleteProductModal";
+import DeleteProduct from "../DeleteProductModal";
 import OpenModalButton from "../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import "./productsofowner.css";
@@ -28,7 +30,7 @@ const ProductsOfOwner = () => {
           return (
             <div className="store-product-card" key={product.id}>
               <NavLink
-                to={`/products/${product.id}`}
+                to={`current/${product.id}`}
                 className="store-product-link"
               >
                 <img
@@ -38,17 +40,20 @@ const ProductsOfOwner = () => {
                 />
                 <h2 className="store-product-name">{product.name}</h2>
               </NavLink>
-              <div className="product-edit-delete">
-                <OpenModalButton
-                  buttonText="Delete"
-                  className="store-delete-button"
-                  modalComponent={<DeleteProductModal />}
-                />
-                <NavLink to={`/products/${product.id}/edit`}>
-                  <i className="fa-solid fa-pen"></i>
-                  <button className="store-edit-button">Edit Product</button>
-                </NavLink>
-              </div>
+              <Link to={`/products/${product.id}`}>
+                <div className="product-edit-delete">
+                  {console.log("Product-id jsx", product.id)}
+                  <OpenModalButton
+                    buttonText="Delete"
+                    className="store-delete-button"
+                    modalComponent={<DeleteProduct product_id={product.id} />}
+                  />
+                  <NavLink to={`/products/${product.id}/edit`}>
+                    <i className="fa-solid fa-pen"></i>
+                    <button className="store-edit-button">Edit Product</button>
+                  </NavLink>
+                </div>
+              </Link>
             </div>
           );
         })}
