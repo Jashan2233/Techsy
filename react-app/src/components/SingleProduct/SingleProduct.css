@@ -16,19 +16,14 @@
   border-radius: 8px;
 }
 
-.c-product-info-left {
-  flex: 1;
-  padding: 1rem;
-}
-
 .c-product-image {
-  width: 100%;
+  flex: 1; /* Make the image occupy the right side */
   max-height: 300px; /* Adjust image size as needed */
   object-fit: cover;
 }
 
-.c-product-info-right {
-  flex: 1;
+.c-product-info-left {
+  flex: 1; /* Make the text/details occupy the left side */
   padding: 1rem;
 }
 

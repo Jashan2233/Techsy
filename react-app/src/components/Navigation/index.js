@@ -25,9 +25,11 @@ function Navigation({ isLoaded }) {
 
   return (
     <div className="top-nav">
-      <div className="logo-div">
-        <h1 className="logo-schrift">TECHSY</h1>
-      </div>
+      <NavLink className="nav-link-logo" to={"/"}>
+        <div className="logo-div">
+          <h1 className="logo-schrift">TECHSY</h1>
+        </div>
+      </NavLink>
       <ul className="nav">
         <li className="shop-link"> {shopButton()}</li>
         {isLoaded && (

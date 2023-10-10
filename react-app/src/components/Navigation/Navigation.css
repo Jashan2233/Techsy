@@ -50,3 +50,7 @@
   color: #ff6600;
   text-shadow: 1px 1px 2px #333;
 }
+
+.nav-link-logo {
+  text-decoration: none;
+}
