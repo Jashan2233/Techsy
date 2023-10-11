@@ -13,7 +13,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const { product_id } = useParams();
   const product = useSelector(
-    (state) => state.products.allProducts[product_id - 1]
+    (state) => state.products.allProducts[product_id]
   );
   const new_review = useSelector((state) => state.reviews.newReview);
   const userReviews = useSelector((state) => state.reviews.userReviews);
