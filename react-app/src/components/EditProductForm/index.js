@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as productStore from "../../store/products";
-import { getSingleProductThunk } from "../../store/products";
 import "./EditProductForm.css";
+
 const EditProduct = () => {
   const { product_id } = useParams();
   console.log("productid in comp", product_id);
@@ -17,18 +17,29 @@ const EditProduct = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (product) {
-      setName(product.name);
-      setDescription(product.description);
-      setPrice(product.price);
-    }
-  }, [product]);
-
-  useEffect(() => {
-    dispatch(productStore.getSingleProductThunk(product_id));
-  }, [dispatch, product_id]);
-
-  if (!product) return null;
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`api/products/${product_id}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.product) {
+            const oldProduct = data.product;
+            setName(oldProduct.name);
+            setDescription(oldProduct.description);
+            setPrice(oldProduct.price);
+            console.log("Fetched product data for editing.");
+          } else {
+            console.log("No product data received.");
+          }
+        } else {
+          console.error("API call failed with status code:", res.status);
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching the product:", error);
+      }
+    };
+    fetchProduct();
+  }, [product_id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,12 +66,11 @@ const EditProduct = () => {
     );
 
     if (editedProduct) {
-      history.push(`/products/${product_id}`);
+      console.log("edited is there!!!", editedProduct.id);
+      history.push(`/products/${editedProduct.id}`);
     } else {
       console.log("EDIT FAILED");
     }
-
-    history.push("/products");
   };
 
   return (

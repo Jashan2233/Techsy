@@ -16,16 +16,29 @@ const CreateProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [preview_image, setPreview_image] = useState("");
-  const [errors, setErrors] = useState({}); // Initialize errors as an object
+  const [errors, setErrors] = useState({});
+
+  // Set the maximum character limit for description
+  const maxDescriptionLength = 100;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let errorsObj = {};
+
     if (!name.length) errorsObj.name = "Name is Required";
     if (!price.length || price < 5)
       errorsObj.price = "Please enter a valid price";
-    if(!description.length) errorsObj.description = "Please add a description for the product!"
+
+    // Check if the description exceeds the character limit
+    if (description.length > maxDescriptionLength) {
+      errorsObj.description = `Description should be ${maxDescriptionLength} characters or less.`;
+    }
+
+    // Check if description is empty
+    if (!description.trim()) {
+      errorsObj.description = "Description is required.";
+    }
     if (!preview_image) errorsObj.preview_image = "Image is required!";
 
     // Set the errors state
@@ -41,8 +54,6 @@ const CreateProduct = () => {
     newProduct.append("description", description);
     newProduct.append("price", price);
     newProduct.append("preview_image", preview_image);
-
-    console.log("name", name);
 
     // Dispatch Thunk
     const createdProduct = await dispatch(createProductThunk(newProduct));
@@ -98,7 +109,7 @@ const CreateProduct = () => {
               type="textbox"
               onChange={(e) => setDescription(e.target.value)}
               value={description}
-              placeholder="Please write at least 30 characters"
+              placeholder={`Please enter a description for the product!`}
               name="description"
               rows="7"
             />

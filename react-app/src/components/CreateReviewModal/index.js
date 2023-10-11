@@ -22,18 +22,19 @@ const CreateReviewModal = ({ product_id }) => {
 
   useEffect(() => {
     const errors = {};
-    if (review.length < 10)
-      errors.review = "Please enter more than 10 Character";
+    if (review.length < 10 || review.length > 100) {
+      errors.review = "Please enter between 10 and 100 characters";
+    }
     setValidationErrors(errors);
   }, [review]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // setSubmitted(true);
-    // if (
-    //   !Object.values(validationErrors).length &&
-    //   user.id !== singleProduct.owner_id
-    {
+
+    if (
+      !Object.values(validationErrors).length &&
+      user.id !== singleProduct.owner_id
+    ) {
       const payload = {
         review,
         rating,
@@ -47,11 +48,6 @@ const CreateReviewModal = ({ product_id }) => {
       await dispatch(productActions.getSingleProductThunk(product_id));
     }
   };
-
-  //   const reviewButtonId =
-  //     review.length < 10 && !rating
-  //       ? "submit-review-not-valid"
-  //       : "submit-review-button";
 
   return (
     <>
@@ -78,12 +74,8 @@ const CreateReviewModal = ({ product_id }) => {
                   : "fa-sharp fa-regular fa-star"
               }
               onMouseEnter={() => setActiveRating(1)}
-              onClick={() => {
-                setRating(1);
-              }}
-            >
-              {/* <i class="fa-sharp fa-regular fa-star"></i> */}
-            </div>
+              onClick={() => setRating(1)}
+            ></div>
             <div
               className={
                 activeRating >= 2
@@ -95,9 +87,7 @@ const CreateReviewModal = ({ product_id }) => {
                 setRating(2);
                 setActiveRating(2);
               }}
-            >
-              {/* <i class="fa-regular fa-star"></i> */}
-            </div>
+            ></div>
             <div
               className={
                 activeRating >= 3
@@ -109,9 +99,7 @@ const CreateReviewModal = ({ product_id }) => {
                 setRating(3);
                 setActiveRating(3);
               }}
-            >
-              {/* <i class="fa-regular fa-star"></i> */}
-            </div>
+            ></div>
             <div
               className={
                 activeRating >= 4
@@ -123,9 +111,7 @@ const CreateReviewModal = ({ product_id }) => {
                 setRating(4);
                 setActiveRating(4);
               }}
-            >
-              {/* <i class="fa-regular fa-star"></i> */}
-            </div>
+            ></div>
             <div
               className={
                 activeRating >= 5
@@ -137,15 +123,12 @@ const CreateReviewModal = ({ product_id }) => {
                 setRating(5);
                 setActiveRating(5);
               }}
-            >
-              {/* <i class="fa-regular fa-star"></i> */}
-            </div>
+            ></div>
             Rating
           </div>
           <button
             type="submit"
-            // id={reviewButtonId}
-            disabled={review.length < 10 || !rating}
+            disabled={review.length < 10 || review.length > 50 || !rating}
           >
             Submit Your Review
           </button>

@@ -81,7 +81,7 @@ const SingleProduct = () => {
           {reviews.reverse().map((review, index) => (
             <div className="reviews-details" key={index}>
               <h3 className="review-name">
-                {user?.username} -{" "}
+                {review.User_Info?.username}
                 {Array.from({ length: Math.floor(review.rating) }, (_, i) => (
                   <i key={i} className="fa-solid fa-star"></i>
                 ))}
@@ -109,15 +109,18 @@ const SingleProduct = () => {
               <h4>{review.review}</h4>
             </div>
           ))}
-          {!reviews.length && !userReview && user?.id !== product?.owner_id && (
-            <div className="post-review-button">
-              <OpenModalButton
-                buttonText="Create Review"
-                modalComponent={<CreateReviewModal product_id={product_id} />}
-              />
-              <p id="be-first">Be the first to post a review!</p>
-            </div>
-          )}
+          {!reviews.length &&
+            !userReview &&
+            user &&
+            user?.id !== product?.owner_id && (
+              <div className="post-review-button">
+                <OpenModalButton
+                  buttonText="Create Review"
+                  modalComponent={<CreateReviewModal product_id={product_id} />}
+                />
+                <p id="be-first">Be the first to post a review!</p>
+              </div>
+            )}
         </div>
       </div>
     </>
