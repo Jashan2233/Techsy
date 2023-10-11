@@ -12,8 +12,11 @@ import UpdateReview from "../UpdateReviewModal";
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const { product_id } = useParams();
+  const productId = parseInt(product_id);
+  console.log("this parsedId", productId);
+  console.log(product_id, "this the id in single!!!");
   const product = useSelector(
-    (state) => state.products.allProducts[product_id]
+    (state) => state.products.allProducts[productId - 1]
   );
   const new_review = useSelector((state) => state.reviews.newReview);
   const userReviews = useSelector((state) => state.reviews.userReviews);
