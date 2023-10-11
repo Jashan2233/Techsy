@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
-import * as reviewActions from '../../store/reviews';
+import * as reviewActions from "../../store/reviews";
 
 const UpdateReview = ({ review_id }) => {
   const dispatch = useDispatch();
@@ -29,6 +29,7 @@ const UpdateReview = ({ review_id }) => {
     let allErrors = {};
 
     if (review.length < 5) allErrors.review = "Review is too short";
+    if (review.length > 50) allErrors.review = "Review is too long!";
 
     if (Object.keys(allErrors).length) {
       return setErrors(allErrors);
@@ -39,15 +40,19 @@ const UpdateReview = ({ review_id }) => {
       rating,
     };
 
-    let updatedReview = await dispatch(reviewActions.thunkUpdateUserReview(review_id, newReview));
+    let updatedReview = await dispatch(
+      reviewActions.thunkUpdateUserReview(review_id, newReview)
+    );
     closeModal();
   };
 
   return (
-    <div className='update-review-container'>
-      <h2 className='update-review-title-header'>Update Your Review</h2>
-      <form onSubmit={handleSubmit} className='review-form'>
-        {errors.review ? <p className='update-review-errors'>{errors.review}</p> : null}
+    <div className="update-review-container">
+      <h2 className="update-review-title-header">Update Your Review</h2>
+      <form onSubmit={handleSubmit} className="review-form">
+        {errors.review ? (
+          <p className="update-review-errors">{errors.review}</p>
+        ) : null}
         <textarea
           className="review-text-box"
           type="text"
