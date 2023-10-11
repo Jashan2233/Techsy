@@ -30,7 +30,7 @@ const ProductsOfOwner = () => {
           return (
             <div className="store-product-card" key={product.id}>
               <NavLink
-                to={`current/${product.id}`}
+                to={`/products/${product.id}`}
                 className="store-product-link"
               >
                 <img
