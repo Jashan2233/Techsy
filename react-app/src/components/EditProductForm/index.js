@@ -6,11 +6,12 @@ import "./EditProductForm.css";
 
 const EditProduct = () => {
   const { product_id } = useParams();
+  const productId = parseInt(product_id);
   console.log("productid in comp", product_id);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const product = useSelector((state) => state.products.ownedProducts);
+  const product = useSelector((state) => state.products.allProducts);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -19,10 +20,12 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`api/products/${product_id}`);
+        const res = dispatch(productStore.getSingleProductThunk(productId));
+        console.log("this res", res);
+        const data = await res.json();
+        console.log("this data", data);
         if (res.ok) {
-          const data = await res.json();
-          if (data && data.product) {
+          if (data) {
             const oldProduct = data.product;
             setName(oldProduct.name);
             setDescription(oldProduct.description);
@@ -92,7 +95,7 @@ const EditProduct = () => {
               className="edit-product-input"
               type="text"
               onChange={(e) => setName(e.target.value)}
-              value={name}
+              value={name} // Prepopulate name field
               placeholder="Name"
               name="name"
             />
@@ -109,7 +112,7 @@ const EditProduct = () => {
               className="edit-product-description-field"
               type="textbox"
               onChange={(e) => setDescription(e.target.value)}
-              value={description}
+              value={description} // Prepopulate description field
               placeholder="Please write at least 30 characters"
               name="description"
               rows="7"
@@ -124,7 +127,7 @@ const EditProduct = () => {
               className="edit-product-input"
               type="number"
               onChange={(e) => setPrice(e.target.value)}
-              value={price}
+              value={price} // Prepopulate price field
               placeholder="Price"
               name="price"
             />
