@@ -24,7 +24,7 @@ const CreateReviewModal = ({ product_id }) => {
     if (review.length < 10) {
       errors.review = "Review must be at least 10 characters long.";
     } else if (review.length > 50) {
-      errors.review = "Review can't be more than 100 characters long.";
+      errors.review = "Review can't be more than 50 characters long.";
     } else {
       errors.review = ""; // Clear the error when review length is within the allowed range
     }
