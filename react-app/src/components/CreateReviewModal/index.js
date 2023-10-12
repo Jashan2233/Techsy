@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
 import { useModal } from "../../context/Modal";
 import { useEffect, useState } from "react";
 import * as reviewActions from "../../store/reviews";
 import * as productActions from "../../store/products";
 
 const CreateReviewModal = ({ product_id }) => {
-  console.log();
   const user = useSelector((state) => state.session.user);
   const singleProduct = useSelector(
     (state) => state.products.allProducts[product_id - 1]
@@ -22,8 +20,13 @@ const CreateReviewModal = ({ product_id }) => {
 
   useEffect(() => {
     const errors = {};
-    if (review.length < 10 || review.length > 100) {
-      errors.review = "Please enter between 10 and 100 characters";
+
+    if (review.length < 10) {
+      errors.review = "Review must be at least 10 characters long.";
+    } else if (review.length > 50) {
+      errors.review = "Review can't be more than 100 characters long.";
+    } else {
+      errors.review = ""; // Clear the error when review length is within the allowed range
     }
     setValidationErrors(errors);
   }, [review]);
@@ -31,10 +34,7 @@ const CreateReviewModal = ({ product_id }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !Object.values(validationErrors).length &&
-      user.id !== singleProduct.owner_id
-    ) {
+    if (!validationErrors.review && user.id !== singleProduct.owner_id) {
       const payload = {
         review,
         rating,
@@ -46,6 +46,8 @@ const CreateReviewModal = ({ product_id }) => {
       );
       closeModal();
       await dispatch(productActions.getSingleProductThunk(product_id));
+    } else {
+      setSubmitted(true);
     }
   };
 
@@ -126,12 +128,7 @@ const CreateReviewModal = ({ product_id }) => {
             ></div>
             Rating
           </div>
-          <button
-            type="submit"
-            disabled={review.length < 10 || review.length > 50 || !rating}
-          >
-            Submit Your Review
-          </button>
+          <button type="submit">Submit Your Review</button>
         </form>
       </div>
     </>
