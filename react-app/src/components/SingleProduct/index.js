@@ -112,18 +112,15 @@ const SingleProduct = () => {
               <h4>{review.review}</h4>
             </div>
           ))}
-          {!reviews.length &&
-            !userReview &&
-            user &&
-            user?.id !== product?.owner_id && (
-              <div className="post-review-button">
-                <OpenModalButton
-                  buttonText="Create Review"
-                  modalComponent={<CreateReviewModal product_id={product_id} />}
-                />
-                <p id="be-first">Be the first to post a review!</p>
-              </div>
-            )}
+          {user && user?.id !== product?.owner_id && !userReview && (
+            <div className="post-review-button">
+              <OpenModalButton
+                buttonText="Create Review"
+                modalComponent={<CreateReviewModal product_id={product_id} />}
+              />
+              <p id="be-first">Be the first to post a review!</p>
+            </div>
+          )}
         </div>
       </div>
     </>
