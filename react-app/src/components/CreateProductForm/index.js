@@ -26,19 +26,26 @@ const CreateProduct = () => {
 
     let errorsObj = {};
 
-    if (!name.length) errorsObj.name = "Name is Required";
-    if (!price.length || price < 5)
+    if (!name.length) {
+      errorsObj.name = "Name is Required";
+    } else if (name.length < 5 || name.length > 50) {
+      errorsObj.name = "Name should be between 5 and 50 characters.";
+    }
+
+    if (!price.length || price < 5) {
       errorsObj.price = "Please enter a valid price";
+    }
 
     // Check if the description exceeds the character limit
-    if (description.length > maxDescriptionLength) {
-      errorsObj.description = `Description should be ${maxDescriptionLength} characters or less.`;
+    if (description.length < 5 || description.length > maxDescriptionLength) {
+      errorsObj.description = `Description should be between 5 and ${maxDescriptionLength} characters.`;
     }
 
     // Check if description is empty
     if (!description.trim()) {
       errorsObj.description = "Description is required.";
     }
+
     if (!preview_image) errorsObj.preview_image = "Image is required!";
 
     // Set the errors state
@@ -82,9 +89,7 @@ const CreateProduct = () => {
             }}
           >
             <label className="new-product-label">Name</label>
-            {errors.name ? (
-              <p className="new-product-errors">{errors.name}</p>
-            ) : null}
+            {errors.name && <p className="new-product-errors">{errors.name}</p>}
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
@@ -102,9 +107,9 @@ const CreateProduct = () => {
             }}
           >
             <label className="new-product-label">Description</label>
-            {errors.description ? (
+            {errors.description && (
               <p className="new-product-errors">{errors.description}</p>
-            ) : null}
+            )}
             <textarea
               type="textbox"
               onChange={(e) => setDescription(e.target.value)}
@@ -123,9 +128,9 @@ const CreateProduct = () => {
             }}
           >
             <label className="new-product-label">Price($)</label>
-            {errors.price ? (
+            {errors.price && (
               <p className="new-product-errors">{errors.price}</p>
-            ) : null}
+            )}
             <input
               type="number"
               onChange={(e) => setPrice(e.target.value)}
@@ -143,9 +148,9 @@ const CreateProduct = () => {
             }}
           >
             <label className="new-product-label">Preview Image</label>
-            {errors.preview_image ? (
+            {errors.preview_image && (
               <p className="new-product-errors">{errors.preview_image}</p>
-            ) : null}
+            )}
             <input
               type="file"
               accept=".jpg, .jpeg, .png"
