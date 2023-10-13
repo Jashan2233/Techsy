@@ -11,38 +11,50 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const product = useSelector((state) => state.products.allProducts);
+  const product = useSelector(
+    (state) => state.products.allProducts[productId - 1]
+  );
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [errors, setErrors] = useState({});
 
+  // useEffect(() => {
+  //   const fetchProduct = async () => {
+  //     try {
+  //       const res = dispatch(productStore.getSingleProductThunk(productId));
+  //       console.log("this res", res);
+  //       const data = await res.json();
+  //       console.log("this data", data);
+  //       if (res.ok) {
+  //         if (data) {
+  //           const oldProduct = data.product;
+  //           setName(oldProduct.name);
+  //           setDescription(oldProduct.description);
+  //           setPrice(oldProduct.price);
+  //           console.log("Fetched product data for editing.");
+  //         } else {
+  //           console.log("No product data received.");
+  //         }
+  //       } else {
+  //         console.error("API call failed with status code:", res.status);
+  //       }
+  //     } catch (error) {
+  //       console.error("An error occurred while fetching the product:", error);
+  //     }
+  //   };
+  //   fetchProduct();
+  // }, [product_id]);
+
+  //Prepopulating Form!
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = dispatch(productStore.getSingleProductThunk(productId));
-        console.log("this res", res);
-        const data = await res.json();
-        console.log("this data", data);
-        if (res.ok) {
-          if (data) {
-            const oldProduct = data.product;
-            setName(oldProduct.name);
-            setDescription(oldProduct.description);
-            setPrice(oldProduct.price);
-            console.log("Fetched product data for editing.");
-          } else {
-            console.log("No product data received.");
-          }
-        } else {
-          console.error("API call failed with status code:", res.status);
-        }
-      } catch (error) {
-        console.error("An error occurred while fetching the product:", error);
-      }
-    };
-    fetchProduct();
-  }, [product_id]);
+    if (product) {
+      console.log("Product edit here", product);
+      setName(product.name);
+      setDescription(product.description);
+      setPrice(product.price);
+    }
+  }, [product]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
