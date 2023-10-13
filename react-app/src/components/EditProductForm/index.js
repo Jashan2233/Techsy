@@ -11,9 +11,7 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const product = useSelector(
-    (state) => state.products.allProducts[productId - 1]
-  );
+  const product = useSelector((state) => state.products.allProducts[productId]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
