@@ -15,9 +15,7 @@ const SingleProduct = () => {
   const productId = parseInt(product_id);
   console.log("this parsedId", productId);
   console.log(product_id, "this the id in single!!!");
-  const product = useSelector(
-    (state) => state.products.allProducts[productId - 1]
-  );
+  const product = useSelector((state) => state.products.allProducts[productId]);
   const new_review = useSelector((state) => state.reviews.newReview);
   const userReviews = useSelector((state) => state.reviews.userReviews);
   const user = useSelector((state) => state.session.user);
