@@ -7,7 +7,7 @@ import * as productActions from "../../store/products";
 const CreateReviewModal = ({ product_id }) => {
   const user = useSelector((state) => state.session.user);
   const singleProduct = useSelector(
-    (state) => state.products.allProducts[product_id - 1]
+    (state) => state.products.allProducts[product_id]
   );
   const dispatch = useDispatch();
   const { closeModal } = useModal();

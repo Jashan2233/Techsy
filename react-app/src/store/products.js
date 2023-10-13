@@ -7,10 +7,12 @@ const DELETE_OWNED_PRODUCT = "products/DELETE_A_PRODUCT";
 
 // Action
 
-export const getallProducts = (products) => ({
-  type: GET_ALL_PRODUCTS,
-  products,
-});
+export const getallProducts = (products) => {
+  return {
+    type: GET_ALL_PRODUCTS,
+    products,
+  };
+};
 
 export const getProduct = (productId) => ({
   type: GET_PRODUCT,
@@ -27,15 +29,35 @@ export const deleteOwnedProduct = (product_id) => ({
   product_id,
 });
 
-export const getOwnedProducts = (products) => ({
-  type: GET_OWNED_PRODUCTS,
-  products,
-});
+export const getOwnedProducts = (products) => {
+  return {
+    type: GET_OWNED_PRODUCTS,
+    products,
+  };
+};
 
-export const editOwnedProduct = (products) => ({
-  type: EDIT_OWNED_PRODUCTS,
-  products,
-});
+export const editOwnedProduct = (products) => {
+  return { type: EDIT_OWNED_PRODUCTS, products };
+};
+
+//NORMALIZATION FUNCTIONS
+const normalizingAllProducts = (products) => {
+  let normalizedProducts = {};
+  products.forEach((product) => {
+    normalizedProducts[product.id] = product;
+  });
+  return normalizedProducts;
+};
+
+const normalizingUserProducts = (products) => {
+  let normalizedProducts = {};
+  for (let key in products) {
+    if (products.hasOwnProperty(key)) {
+      normalizedProducts[key] = products[key];
+    }
+  }
+  return normalizedProducts;
+};
 
 // THUNKS
 
@@ -44,7 +66,8 @@ export const getAllProductsThunk = () => async (dispatch) => {
   const res = await fetch("/api/products");
   if (res.ok) {
     const data = await res.json();
-    dispatch(getallProducts(data));
+    const normalizedProducts = normalizingAllProducts(data);
+    dispatch(getallProducts(normalizedProducts));
     return data;
   }
 };
@@ -79,6 +102,7 @@ export const getOwnedProductsThunk = () => async (dispatch) => {
   const res = await fetch("/api/products/current");
   if (res.ok) {
     const data = await res.json();
+    // const normalizedProducts = normalizingUserProducts(data);
     console.log("got products of owner", data);
     dispatch(getOwnedProducts(data));
   }
@@ -130,7 +154,10 @@ const allProductsReducer = (state = initialState, action) => {
       return newState;
     }
     case GET_PRODUCT: {
-      const newState = { ...state, singleProduct: action.productId };
+      const newState = { ...state, allProducts: { ...state.allProducts } };
+      // console.log('------ACTION-----', action)
+      // console.log('-----NEWSTATE---', newState)
+      newState.singleProduct = action.id;
       return newState;
     }
     case CREATE_NEW_PRODUCT: {

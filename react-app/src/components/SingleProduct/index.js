@@ -16,7 +16,7 @@ const SingleProduct = () => {
   console.log("this parsedId", productId);
   console.log(product_id, "this the id in single!!!");
   const product = useSelector(
-    (state) => state.products.allProducts[productId - 1]
+    (state) => state.products.allProducts[product_id]
   );
   const new_review = useSelector((state) => state.reviews.newReview);
   const userReviews = useSelector((state) => state.reviews.userReviews);
