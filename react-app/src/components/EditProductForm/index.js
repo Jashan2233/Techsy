@@ -12,7 +12,9 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const product = useSelector((state) => state.products.allProducts[productId]);
+  const product = useSelector(
+    (state) => state.products.allProducts[productId - 1]
+  );
   console.log("productstate", product);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -58,6 +60,7 @@ const EditProduct = () => {
     if (editedProduct) {
       console.log("edited is there!!!", editedProduct.id);
       history.push(`/products/${editedProduct.id}`);
+      dispatch(productStore.getSingleProductThunk(editedProduct.id));
     } else {
       console.log("EDIT FAILED");
     }
