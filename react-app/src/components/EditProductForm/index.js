@@ -6,14 +6,14 @@ import "./EditProductForm.css";
 
 const EditProduct = () => {
   const { product_id } = useParams();
+  // console.log("productid in editform", product_id);
   const productId = parseInt(product_id);
-  console.log("productid in comp", product_id);
+  console.log("productid in comp", productId);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const product = useSelector(
-    (state) => state.products.allProducts[productId - 1]
-  );
+  const product = useSelector((state) => state.products.allProducts[productId]);
+  console.log("productstate", product);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
