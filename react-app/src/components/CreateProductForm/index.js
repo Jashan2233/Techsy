@@ -31,9 +31,8 @@ const CreateProduct = () => {
     } else if (name.length < 5 || name.length > 50) {
       errorsObj.name = "Name should be between 5 and 50 characters.";
     }
-
-    if (!price.length || price < 5) {
-      errorsObj.price = "Please enter a valid price";
+    if (!price.length || price < 5 || price.toString().length > 5) {
+      errorsObj.price = "Please enter a valid price with up to 5 digits.";
     }
 
     // Check if the description exceeds the character limit

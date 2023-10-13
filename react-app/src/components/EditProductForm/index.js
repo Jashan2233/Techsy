@@ -33,12 +33,17 @@ const EditProduct = () => {
     e.preventDefault();
 
     let errorsObj = {};
-    if (!name || !name.length) errorsObj.name = "Name is Required";
-    if (!price || !price.length)
-      errorsObj.price =
-        "Please enter a valid price, watch that you dont use decimals!";
-    if (!description || description.length < 30)
-      errorsObj.description = "Please add a description for your product";
+    if (!name.length) {
+      errorsObj.name = "Name is Required";
+    } else if (name.length < 4 || name.length > 50) {
+      errorsObj.name = "Name should be between 4 and 50 characters.";
+    }
+    if (!price.length || price < 5 || price.toString().length > 5) {
+      errorsObj.price = "Please enter a valid price with up to 5 digits.";
+    }
+    if (!description || description.length < 5 || description.length > 100)
+      errorsObj.description =
+        "Description should be between 5 and 100 characters";
 
     if (Object.keys(errorsObj).length !== 0) {
       return setErrors(errorsObj);
