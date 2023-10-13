@@ -2,18 +2,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
 import * as reviewActions from "../../store/reviews";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const UpdateReview = ({ review_id }) => {
+  const { product_id } = useParams;
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const previousReviews = useSelector((state) => state.reviews.userReviews);
-  const previousReview = previousReviews[review_id];
+  const previousReviews = useSelector(
+    (state) => state.reviews.productReviews[review_id]
+  );
+  // const previousReview = previousReviews[review_id];
+  console.log("review_id", review_id);
 
   // Check if previousReview exists before accessing its properties
-  const [rating, setRating] = useState(previousReview?.rating || 1); // Initialize with the existing rating or default to 1
+  const [rating, setRating] = useState(""); // Initialize with the existing rating or default to 1
   const [reviewButton, setReviewButton] = useState();
   const [errors, setErrors] = useState("");
-  const [review, setReview] = useState(previousReview?.review || "");
+  const [review, setReview] = useState("");
+  console.log("this is preview reviews", previousReviews);
+
+  useEffect(() => {
+    if (previousReviews) {
+      setReview(previousReviews.review);
+      setRating(previousReviews.rating);
+    }
+  }, [previousReviews]);
 
   const handleInputChange = (e) => {
     setReview(e.target.value);
