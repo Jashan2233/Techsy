@@ -39,7 +39,7 @@ def adding_to_cart():
         db.session.commit()
         return item_in_cart.to_dict()
 
-
+#Edit Product quantity in Cart
 @cart_routes.route('/', methods=['PUT'])
 @login_required
 def update_cart_item_quantity():
@@ -55,3 +55,18 @@ def update_cart_item_quantity():
     db.session.add(item_in_cart)
     db.session.commit()
     return item_in_cart.to_dict()
+
+
+#DELETE item from Cart
+@cart_routes.route('/delete_single_item', methods=['DELETE'])
+def delete_item_from_cart():
+    data = request.get_json()
+    product_id = data['product_id']
+    owner_id = current_user.id
+
+    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(Shopping_Cart.user_id == owner_id).first()
+
+    db.session.delete(item_in_cart)
+    db.session.commit()
+
+    return {'message': 'Item Deleted Successfully from Cart !!!'}
