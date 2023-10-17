@@ -41,8 +41,17 @@ def adding_to_cart():
 
 
 @cart_routes.route('/', methods=['PUT'])
+@login_required
 def update_cart_item_quantity():
     data = request.get_json()
     quantity = data['quantity']
     product_id = data['item']['id']
     owner_id = current_user.id
+
+    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(Shopping_Cart.user_id == owner_id).first()
+
+
+    item_in_cart.quantity = quantity
+    db.session.add(item_in_cart)
+    db.session.commit()
+    return item_in_cart.to_dict()
