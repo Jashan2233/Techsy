@@ -35,3 +35,24 @@ export const getCartThunk = () => async (dispatch) => {
     return normalizedCart;
   }
 };
+
+//Add Product to Cart
+
+export const thunkAddToCart = (product) => async (dispatch) => {
+  // console.log("PRODUCT WENT THROUGH HERE!!:",product)
+  const response = await fetch(`/api/cart/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(product),
+  });
+
+  if (response.ok) {
+    const cartProduct = await response.json();
+    // const normalizedCartProduct = normalizeCarts(cartProduct)
+    await dispatch(actionAddToCart(cartProduct));
+    await dispatch(getCartThunk());
+    return cartProduct;
+  }
+};
