@@ -70,3 +70,19 @@ def delete_item_from_cart():
     db.session.commit()
 
     return {'message': 'Item Deleted Successfully from Cart !!!'}
+
+
+#DELETE All Items from Cart
+@cart_routes.route('/delete_all_items_from_cart', methods=['DELETE'])
+@login_required
+def delete_all_items_from_cart():
+    data = request.get_json()
+    cart_owner_id = data
+
+    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.user_id == cart_owner_id).all()
+
+    for item in item_in_cart:
+        db.session.delete(item)
+        db.session.commit()
+
+        return {'message': 'Successfully emptyed the whole Cart'}

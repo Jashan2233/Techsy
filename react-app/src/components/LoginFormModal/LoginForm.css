@@ -1,64 +1,67 @@
+/* LoginForm.css */
 
-.login-form-container {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+}
 
-  .login-form-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #ff6600;
-    font-weight: bold;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .login-form {
-    display: flex;
-    flex-direction: column;
-  }
+#wrong-password {
+  color: #FF5733;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+}
 
-  .error-list {
-    list-style: none;
-    color: #ff0000;
-    padding: 0;
-    margin: 0;
-  }
+.modal-bars {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+}
 
-  .error-item {
-    margin-bottom: 10px;
-  }
+.modal-buttons {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+  background-color: #f39c12;
+  /* Etsy's signature color */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  .input-label {
-    display: block;
-    text-align: left;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
+.modal-buttons:hover {
+  background-color: #d8780b;
+  /* Darker shade on hover */
+}
 
-  .input-field {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
+.modal-buttons:disabled {
+  background-color: #ccc;
+  /* Disable button color */
+  cursor: not-allowed;
+}
 
-  .login-button {
-    background-color: #ff6600;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-  }
+/* Demo User Button */
+.modal-buttons.demo-button {
+  background-color: #52b788;
+  /* A different color for the demo button */
+}
 
-  .login-button:hover {
-    background-color: #ff5500;
-  }
+.modal-buttons.demo-button:hover {
+  background-color: #3e8f5a;
+  /* Darker shade on hover for the demo button */
+}

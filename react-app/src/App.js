@@ -11,6 +11,7 @@ import Products from "./components/Products";
 import DeleteProduct from "./components/DeleteProductModal";
 import Shop from "./components/Shop";
 import SingleProduct from "./components/SingleProduct";
+import LoginFormModal from "./components/LoginFormModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route path="/login">
-            <LoginFormPage />
+            <LoginFormModal />
           </Route>
           <Route exact path="/products/create">
             <CreateProduct />
