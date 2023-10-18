@@ -12,8 +12,11 @@ import UpdateReview from "../UpdateReviewModal";
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const { product_id } = useParams();
+  const productId = parseInt(product_id);
+  console.log("this parsedId", productId);
+  console.log(product_id, "this the id in single!!!");
   const product = useSelector(
-    (state) => state.products.allProducts[product_id - 1]
+    (state) => state.products.allProducts[product_id]
   );
   const new_review = useSelector((state) => state.reviews.newReview);
   const userReviews = useSelector((state) => state.reviews.userReviews);
@@ -81,7 +84,7 @@ const SingleProduct = () => {
           {reviews.reverse().map((review, index) => (
             <div className="reviews-details" key={index}>
               <h3 className="review-name">
-                {user?.username} -{" "}
+                {review.User_Info?.username}
                 {Array.from({ length: Math.floor(review.rating) }, (_, i) => (
                   <i key={i} className="fa-solid fa-star"></i>
                 ))}
@@ -109,7 +112,7 @@ const SingleProduct = () => {
               <h4>{review.review}</h4>
             </div>
           ))}
-          {!reviews.length && !userReview && user?.id !== product?.owner_id && (
+          {user && user?.id !== product?.owner_id && !userReview && (
             <div className="post-review-button">
               <OpenModalButton
                 buttonText="Create Review"

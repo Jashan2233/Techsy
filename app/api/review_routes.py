@@ -25,8 +25,7 @@ def get_reviews_of_product(product_id):
     for review in reviews:
         user_id = review['user_id']
         user = User.query.get(user_id)
-        review_user = user.to_dict()
-        review['User_Info'] = review_user
+        review['User_Info'] = user.to_dict()
 
     return reviews
 

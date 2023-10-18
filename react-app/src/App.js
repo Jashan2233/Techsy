@@ -37,13 +37,13 @@ function App() {
           <Route exact path="/shops/current">
             <Shop />
           </Route>
-          <Route path="/products/:product_id/edit">
+          <Route exact path="/products/:product_id/edit">
             <EditProduct />
           </Route>
           <Route path="/">
             <Products />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
         </Switch>

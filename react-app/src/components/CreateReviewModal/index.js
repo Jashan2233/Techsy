@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
 import { useModal } from "../../context/Modal";
 import { useEffect, useState } from "react";
 import * as reviewActions from "../../store/reviews";
 import * as productActions from "../../store/products";
 
 const CreateReviewModal = ({ product_id }) => {
-  console.log();
   const user = useSelector((state) => state.session.user);
   const singleProduct = useSelector(
-    (state) => state.products.allProducts[product_id - 1]
+    (state) => state.products.allProducts[product_id]
   );
   const dispatch = useDispatch();
   const { closeModal } = useModal();
@@ -22,18 +20,21 @@ const CreateReviewModal = ({ product_id }) => {
 
   useEffect(() => {
     const errors = {};
-    if (review.length < 10)
-      errors.review = "Please enter more than 10 Character";
+
+    if (review.length < 10) {
+      errors.review = "Review must be at least 10 characters long.";
+    } else if (review.length > 50) {
+      errors.review = "Review can't be more than 50 characters long.";
+    } else {
+      errors.review = ""; // Clear the error when review length is within the allowed range
+    }
     setValidationErrors(errors);
   }, [review]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // setSubmitted(true);
-    // if (
-    //   !Object.values(validationErrors).length &&
-    //   user.id !== singleProduct.owner_id
-    {
+
+    if (!validationErrors.review && user.id !== singleProduct.owner_id) {
       const payload = {
         review,
         rating,
@@ -45,13 +46,10 @@ const CreateReviewModal = ({ product_id }) => {
       );
       closeModal();
       await dispatch(productActions.getSingleProductThunk(product_id));
+    } else {
+      setSubmitted(true);
     }
   };
-
-  //   const reviewButtonId =
-  //     review.length < 10 && !rating
-  //       ? "submit-review-not-valid"
-  //       : "submit-review-button";
 
   return (
     <>
@@ -78,12 +76,8 @@ const CreateReviewModal = ({ product_id }) => {
                   : "fa-sharp fa-regular fa-star"
               }
               onMouseEnter={() => setActiveRating(1)}
-              onClick={() => {
-                setRating(1);
-              }}
-            >
-              {/* <i class="fa-sharp fa-regular fa-star"></i> */}
-            </div>
+              onClick={() => setRating(1)}
+            ></div>
             <div
               className={
                 activeRating >= 2
@@ -95,9 +89,7 @@ const CreateReviewModal = ({ product_id }) => {
                 setRating(2);
                 setActiveRating(2);
               }}
-            >
-              {/* <i class="fa-regular fa-star"></i> */}
-            </div>
+            ></div>
             <div
               className={
                 activeRating >= 3
@@ -109,9 +101,7 @@ const CreateReviewModal = ({ product_id }) => {
                 setRating(3);
                 setActiveRating(3);
               }}
-            >
-              {/* <i class="fa-regular fa-star"></i> */}
-            </div>
+            ></div>
             <div
               className={
                 activeRating >= 4
@@ -123,9 +113,7 @@ const CreateReviewModal = ({ product_id }) => {
                 setRating(4);
                 setActiveRating(4);
               }}
-            >
-              {/* <i class="fa-regular fa-star"></i> */}
-            </div>
+            ></div>
             <div
               className={
                 activeRating >= 5
@@ -137,18 +125,10 @@ const CreateReviewModal = ({ product_id }) => {
                 setRating(5);
                 setActiveRating(5);
               }}
-            >
-              {/* <i class="fa-regular fa-star"></i> */}
-            </div>
+            ></div>
             Rating
           </div>
-          <button
-            type="submit"
-            // id={reviewButtonId}
-            disabled={review.length < 10 || !rating}
-          >
-            Submit Your Review
-          </button>
+          <button type="submit">Submit Your Review</button>
         </form>
       </div>
     </>

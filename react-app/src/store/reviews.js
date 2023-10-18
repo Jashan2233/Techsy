@@ -30,13 +30,23 @@ export const actionUpdateUserReview = (updated_review) => ({
   updated_review,
 });
 
+// NORMALIZE REVIEWS
+const normalizingAllReviews = (reviews) => {
+  let normalizedReviews = {};
+  reviews.forEach((review) => {
+    normalizedReviews[review.id] = review;
+  });
+  return normalizedReviews;
+};
+
 // THUNKS
 export const thunkGetUserReviews = (user_id) => async (dispatch) => {
   const response = await fetch(`/api/reviews/user/${user_id}`);
 
   if (response.ok) {
-    const user_reviews = await response.json();
-    dispatch(actionGetUserReviews(user_reviews));
+    const reviews = await response.json();
+    const normalizedReviews = normalizingAllReviews(reviews);
+    dispatch(actionGetUserReviews(normalizedReviews));
   }
 };
 
@@ -44,8 +54,10 @@ export const thunkGetProductReviews = (product_id) => async (dispatch) => {
   const response = await fetch(`/api/reviews/product/${product_id}`);
 
   if (response.ok) {
-    const product_reviews = await response.json();
-    dispatch(actionGetProductReviews(product_reviews));
+    const reviews = await response.json();
+    const normalizedReviews = normalizingAllReviews(reviews);
+
+    dispatch(actionGetProductReviews(normalizedReviews));
   }
 };
 
@@ -105,9 +117,11 @@ const productReviewsReducer = (state = initialState, action) => {
 
     case DELETE_REVIEW:
       // Create new objects without the deleted review
-      console.log("STATEHERE", state)
-      const { [action.reviewId]: deletedReview, ...userReviews } = state.userReviews;
-      const { [action.reviewId]: deletedProductReview, ...productReviews } = state.productReviews;
+      console.log("STATEHERE", state);
+      const { [action.reviewId]: deletedReview, ...userReviews } =
+        state.userReviews;
+      const { [action.reviewId]: deletedProductReview, ...productReviews } =
+        state.productReviews;
 
       return {
         ...state,

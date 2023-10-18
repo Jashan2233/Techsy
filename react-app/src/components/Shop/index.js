@@ -31,11 +31,6 @@ const Shop = () => {
           <i class="fa-solid fa-shop"></i>
           Store
         </h3>
-        <div>
-          <NavLink className="home-link" to="/products">
-            HOME
-          </NavLink>
-        </div>
       </div>
       <div className="content-panel">
         {selectedMenuItem === "post" && (

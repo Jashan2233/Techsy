@@ -6,7 +6,7 @@ from ..api.aws_helpers import ALLOWED_EXTENSIONS
 
 class ProductForm(FlaskForm):
     name= StringField('Name', validators=[DataRequired(), Length(min=4, max=50)])
-    description = StringField('Description', validators=[DataRequired(), Length(min=10, max=100)])
+    description = StringField('Description', validators=[DataRequired(), Length(min=5, max=200)])
     price = IntegerField('Price', validators=[DataRequired()])
     preview_image = FileField('Image File', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     submit = SubmitField('Submit')
