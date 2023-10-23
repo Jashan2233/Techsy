@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import * as productActions from "../../store/products";
 import * as reviewActions from "../../store/reviews";
+import * as cartActions from "../../store/shopping_carts";
 import "./SingleProduct.css";
 import OpenModalButton from "../OpenModalButton";
 import CreateReviewModal from "../CreateReviewModal";
@@ -11,10 +12,8 @@ import UpdateReview from "../UpdateReviewModal";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { product_id } = useParams();
-  const productId = parseInt(product_id);
-  console.log("this parsedId", productId);
-  console.log(product_id, "this the id in single!!!");
   const product = useSelector(
     (state) => state.products.allProducts[product_id]
   );
@@ -25,6 +24,12 @@ const SingleProduct = () => {
     useSelector((state) => state.reviews.productReviews)
   );
 
+  // Cart Store and Quantity State
+  const userCart = Object.values(
+    useSelector((state) => state.userCart.userCart)
+  );
+  const [count, setCount] = useState(1);
+
   // Calculate Average Rating for a Product
   let avg = 0;
   if (reviews.length) {
@@ -34,8 +39,38 @@ const SingleProduct = () => {
 
   // Handle Add to Cart
 
-  const handleAddToCart = () => {
-    alert("Feature coming soon!");
+  const handleAddToCart = (count) => {
+    if (!user) {
+      alert("Please Login first!");
+      return;
+    }
+
+    // let itemMaxQuantity = false;
+
+    // if (userCart.length > 0) {
+    //   userCart.forEach((item) => {
+    //     if (item.product_id === parseInt(product_id)) {
+    //       if (item.quantity >= 20 || item.quantity + parseInt(count) > 50) {
+    //         alert("You cant add more than 20 items to your cart");
+    //         itemMaxQuantity = true;
+    //         return;
+    //       }
+    //     }
+    //   });
+    // }
+
+    // if (itemMaxQuantity) {
+    //   return;
+    // }
+
+    const payload = {
+      user_id: user.id,
+      product_id: product_id,
+      quantity: parseInt(5),
+    };
+
+    dispatch(cartActions.thunkAddToCart(payload));
+    history.push("/cart");
   };
 
   // Helper functions:

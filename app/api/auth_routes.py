@@ -30,6 +30,7 @@ def authenticate():
 
 
 @auth_routes.route('/login', methods=['POST'])
+@login_required
 def login():
     """
     Logs a user in

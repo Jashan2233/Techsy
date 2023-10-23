@@ -50,10 +50,13 @@ export const thunkAddToCart = (product) => async (dispatch) => {
 
   if (response.ok) {
     const cartProduct = await response.json();
+    console.log("response in post cart", cartProduct);
     // const normalizedCartProduct = normalizeCarts(cartProduct)
     await dispatch(actionAddToCart(cartProduct));
     await dispatch(getCartThunk());
     return cartProduct;
+  } else {
+    console.log("error in cart post!!", product);
   }
 };
 
