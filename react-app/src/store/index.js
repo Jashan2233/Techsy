@@ -4,11 +4,13 @@ import allProductsReducer from "./products";
 import session from "./session";
 import reviews from "./reviews";
 import productReviewsReducer from "./reviews";
+import cartReducer from "./shopping_carts";
 
 const rootReducer = combineReducers({
   session,
   products: allProductsReducer,
   reviews: productReviewsReducer,
+  userCart: cartReducer,
 });
 
 let enhancer;

@@ -12,6 +12,7 @@ import DeleteProduct from "./components/DeleteProductModal";
 import Shop from "./components/Shop";
 import SingleProduct from "./components/SingleProduct";
 import LoginFormModal from "./components/LoginFormModal";
+import UserCart from "./components/UserCart";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route exact path="/products/:product_id">
             <SingleProduct />
+          </Route>
+          <Route exact path="/cart">
+            <UserCart />
           </Route>
           <Route exact path="/shops/current">
             <Shop />

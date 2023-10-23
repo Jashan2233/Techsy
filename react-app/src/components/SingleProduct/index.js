@@ -32,8 +32,13 @@ const SingleProduct = () => {
     avg = sum / reviews.length; // Average!
   }
 
-  // Helper functions:
+  // Handle Add to Cart
 
+  const handleAddToCart = () => {
+    alert("Feature coming soon!");
+  };
+
+  // Helper functions:
   const totalReviews = reviews.length;
 
   let userReview;
@@ -72,6 +77,10 @@ const SingleProduct = () => {
                 </div>
               </div>
             </div>
+            <button onClick={handleAddToCart} id="add-to-cart-button">
+              {" "}
+              Add to Cart
+            </button>
           </div>
         )}
       </div>

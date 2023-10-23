@@ -38,7 +38,7 @@
 
 .store-button {
   text-decoration: none;
-  color: #fff;
+  color: black;
   font-size: 24px;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .store-button:hover {
-   color: #0056b3;
+   color: orangered;
 }
 
 /* ProfileButton styles can be added here as needed */
