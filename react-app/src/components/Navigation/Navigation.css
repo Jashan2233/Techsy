@@ -1,56 +1,53 @@
-.profile-dropdown {
-  position: absolute;
-  right: 13.5em;
-  margin-top: .55em;
-  z-index: 1;
-  background-color: white;
-  width: 8em;
-  border: 1px solid black;
-  border-radius: 10px;
-  /* display: inline-block; */
-}
-
-.hidden {
-  display: none;
-}
-
-.store-button{
-  text-decoration: none;
-  color: black;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.home-link {
-  text-decoration: none;
-  padding: 20px;
-}
-
-.nav {
-  display: flex;
-  list-style: none;
-  justify-content: right;
-  align-items: center;
-  margin: 20px;
-}
-.shop-link {
-  margin-right: 20px;
-
-}
+/* Navigation.css */
 
 .top-nav {
   display: flex;
   justify-content: space-between;
-  font-family: Roboto, sans-serif;
-}
-
-.logo-div {
-  font-size: 20px;
-  color: #ff6600;
-  text-shadow: 1px 1px 2px #333;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-link-logo {
   text-decoration: none;
 }
+
+.logo-div {
+  display: flex;
+  align-items: center;
+}
+
+.logo-schrift {
+  color: orangered;
+  font-size: 24px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.shop-link {
+  margin-right: 20px;
+}
+
+.store-button {
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+}
+
+.store-button i {
+  margin-right: 5px;
+}
+
+.store-button:hover {
+   color: #0056b3;
+}
+
+/* ProfileButton styles can be added here as needed */
