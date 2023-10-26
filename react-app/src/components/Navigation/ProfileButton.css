@@ -39,3 +39,40 @@
 .profile-dropdown button:hover {
   text-decoration: underline;
 }
+
+.sign-in-button > button {
+ display: flex;
+ border: none;
+ background: none;
+}
+
+.sign-in-button > button:hover {
+  cursor: pointer;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.authentication-container {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  margin-right: 20rem;
+}
+
+.sign-up-button button {
+  display: flex;
+  border: none;
+  background: none;
+}
+
+.sign-up-button button:hover {
+  cursor: pointer;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+}

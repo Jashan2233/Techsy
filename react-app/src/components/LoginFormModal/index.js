@@ -80,6 +80,9 @@ function LoginFormModal() {
           Demo User 2
         </button>
       </form>
+      <a href={"http://localhost:5000/api/auth/callback/api/auth/oauth_login"}>
+        <button>OAUTH</button>
+      </a>
     </div>
   );
 }

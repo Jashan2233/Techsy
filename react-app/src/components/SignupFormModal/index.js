@@ -5,79 +5,86 @@ import { signUp } from "../../store/session";
 import "./SignupForm.css";
 
 function SignupFormModal() {
-	const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errors, setErrors] = useState([]);
-	const { closeModal } = useModal();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState([]);
+  const { closeModal } = useModal();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
-			if (data) {
-				setErrors(data);
-			} else {
-				closeModal();
-			}
-		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
-		}
-	};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-	return (
-		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
-				<label>
-					Email
-					<input
-						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Username
-					<input
-						type="text"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Password
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Confirm Password
-					<input
-						type="password"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<button type="submit">Sign Up</button>
-			</form>
-		</>
-	);
+    if (!email) {
+      setErrors(["Email is required."]);
+    } else if (!email.includes("@")) {
+      setErrors(["Email is wrong format."]);
+    }
+
+    if (password === confirmPassword) {
+      const data = await dispatch(signUp(username, email, password));
+      if (data) {
+        setErrors(data);
+      } else {
+        closeModal();
+      }
+    } else {
+      setErrors([
+        "Confirm Password field must be the same as the Password field",
+      ]);
+    }
+  };
+
+  return (
+    <>
+      <div className="signup-container">
+        <h1 className="header">Sign Up</h1>
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <ul className="signup-errors">
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+          <label className="signup-label">Email</label>
+          <input
+            type="text"
+            className="password-input-signup"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <label className="signup-label">Username</label>
+          <input
+            type="text"
+            className="password-input-signup"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <label className="signup-label">Password</label>
+          <input
+            type="password"
+            className="password-input-signup"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <label className="signup-label">Confirm Password</label>
+          <input
+            type="password"
+            className="password-input-signup"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <button className="signup-button" type="submit">
+            Sign Up
+          </button>
+        </form>
+      </div>
+    </>
+  );
 }
 
 export default SignupFormModal;
