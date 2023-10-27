@@ -23,6 +23,16 @@ function Navigation({ isLoaded }) {
     }
   };
 
+  const cartButton = () => {
+    if (sessionUser) {
+      return (
+        <NavLink to="/cart" className="cart-button">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </NavLink>
+      );
+    }
+  };
+
   return (
     <div className="top-nav">
       <NavLink className="nav-link-logo" to={"/"}>
@@ -31,6 +41,7 @@ function Navigation({ isLoaded }) {
         </div>
       </NavLink>
       <ul className="nav">
+        <li className="cart-link">{cartButton()}</li>
         <li className="shop-link"> {shopButton()}</li>
         {isLoaded && (
           <li>

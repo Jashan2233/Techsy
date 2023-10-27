@@ -4,23 +4,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* padding: 10px 0px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .nav-link-logo {
   text-decoration: none;
+  margin-left: 110px;
 }
 
-.logo-div {
+/* .logo-div {
   display: flex;
   align-items: center;
-}
+} */
 
 .logo-schrift {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: orangered;
-  font-size: 24px;
-  margin-left: 10px;
+  font-size: 34px;
+  margin-left: 240px;
   font-weight: bold;
 }
 
@@ -40,14 +42,35 @@
   text-decoration: none;
   color: black;
   font-size: 24px;
+  margin-right: 40px;
 }
 
 .store-button i {
   margin-right: 5px;
 }
 
+.cart-button {
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+  margin-right: 70px;
+}
+
+.cart-button:hover {
+  color: orangered;
+}
+
 .store-button:hover {
-   color: orangered;
+  color: orangered;
+}
+
+.logo-img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.logo-img:hover {
+  transform: scale(1.1);
 }
 
 /* ProfileButton styles can be added here as needed */
