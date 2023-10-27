@@ -94,9 +94,12 @@ const SingleProduct = () => {
           )}
           <div className="c-product-info-right">
             <h1 className="product-price-tag">${product.price.toFixed(2)}</h1>
+            <h5 className="taxes-class">
+              Local taxes included (where applicable)
+            </h5>
             <h1 className="single-product-name">{product.name}</h1>
             <div className="c-product-owner">
-              Sold by {product.owner_info}
+              <h2>Sold by {product.owner_info}</h2>
               <h3>{product.description}</h3>
             </div>
             <div className="add-to-cart-button-container">
@@ -161,12 +164,13 @@ const SingleProduct = () => {
             {user && user?.id !== product?.owner_id && !userReview && (
               <div className="post-review-button">
                 <OpenModalButton
+                  className="create-button"
                   buttonText="Create Review"
                   modalComponent={<CreateReviewModal product_id={product_id} />}
                 />
-                <p id="be-first">Be the first to post a review!</p>
               </div>
             )}
+            {/* <h2 id="be-first"> Be the first to post a review!</h2> */}
           </div>
         </div>
       </div>

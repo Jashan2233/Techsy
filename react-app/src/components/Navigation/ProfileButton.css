@@ -61,6 +61,7 @@
 
 .sign-up-button button {
   display: flex;
+  margin-right: 360px;
   border: none;
   background: none;
 }
@@ -69,6 +70,7 @@
   cursor: pointer;
   background-color: lightgray;
   border-radius: 10px;
+
   padding: 12px;
   justify-content: center;
   align-items: center;

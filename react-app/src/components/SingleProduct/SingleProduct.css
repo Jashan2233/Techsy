@@ -56,9 +56,20 @@
   font-size: 24px;
 }
 
-.c-product-owner {
-  font-style: italic;
-  color: #555;
+.c-product-owner h2 {
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+
+}
+
+.taxes-class {
+  color: red;
+}
+.c-product-owner h3 {
+  color: grey;
+  font-size: 20px;
+
 }
 
 .reviews-container {
@@ -115,10 +126,23 @@ h4 {
   margin-left: 1rem;
 }
 
-.post-review-button {
-  text-align: center;
+.post-review-button button {
+  display: flex;
   margin-top: 2rem;
+  padding: 10px;
+  width: 120px;
+  border-radius: 6px;
+  background-color: grey;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
 }
+
+.post-review-button button:hover {
+  background-color: orangered;
+  cursor: pointer;
+}
+
 
 #be-first {
   font-style: italic;
@@ -138,7 +162,3 @@ h4 {
   width: 150px;
   border-radius: 15px;
 }
-
-/* #select-quantity:hover {
- background-color: rgb(221, 94, 44);
-} */
