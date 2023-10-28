@@ -60,8 +60,6 @@ const useProductStore = create((set) => ({
           ...state,
           singleProduct: data,
         }));
-        // Store it in localStorage
-        localStorage.setItem("singleProduct", JSON.stringify(data));
       } else {
         console.log("Error in singlespot thunk!");
       }
@@ -83,14 +81,24 @@ const useProductStore = create((set) => ({
   },
 
   // Action to delete an owned product
+  // Action to delete an owned product
+  // Action to delete an owned product
   deleteOwnedProduct: async (product_id) => {
-    console.log("delete ID", product_id);
     const res = await fetch(`/api/products/${product_id}`, {
       method: "DELETE",
     });
     if (res.ok) {
       set((state) => {
-        delete state.allProducts[product_id];
+        // Remove the product from allProducts
+        const updatedAllProducts = { ...state.allProducts };
+        delete updatedAllProducts[product_id];
+
+        return {
+          allProducts: updatedAllProducts,
+          ownedProducts: Array.isArray(state.ownedProducts)
+            ? state.ownedProducts.filter((product) => product.id !== product_id)
+            : [],
+        };
       });
     }
   },

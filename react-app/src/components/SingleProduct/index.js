@@ -16,13 +16,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { product_id } = useParams();
-  // // Check if product_id is available
-  // if (!product_id) {
-  //   // Handle the case where product_id is undefined
-  //   return <p>Loading...</p>;
-  // }
 
-  //Zustand State
   const { allProducts, getallProducts, getProduct } = useProductStore();
   const product = allProducts[product_id];
   console.log("zustandproduct", product);
@@ -85,7 +79,7 @@ const SingleProduct = () => {
     dispatch(reviewActions.thunkGetProductReviews(product_id));
     getProduct(product_id);
     getallProducts();
-  }, [dispatch, product_id, new_review, userReviews]);
+  }, [dispatch, product_id, new_review, userReviews, allProducts]);
 
   if (!product || !reviews) return null;
 

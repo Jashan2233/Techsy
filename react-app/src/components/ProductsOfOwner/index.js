@@ -4,24 +4,23 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import * as productActions from "../../store/products";
 import DeleteProductModal from "../DeleteProductModal";
 import DeleteProduct from "../DeleteProductModal";
+import useProductStore from "../../Zustand/productZustand";
 import OpenModalButton from "../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import "./productsofowner.css";
 
 const ProductsOfOwner = () => {
-  const dispatch = useDispatch();
+  // Zustand State
+  const { allProducts, ownedProducts, getOwnedProducts, getallProducts } =
+    useProductStore();
 
-  const products = useSelector((state) => state.products.ownedProducts);
-
-  const allProducts = useSelector((state) => state.products.allProducts);
-
-  const productsArr = Object.values(products);
+  const productsArr = Object.values(ownedProducts);
 
   const ownedProductsArray = productsArr[0];
 
   useEffect(() => {
-    dispatch(productActions.getOwnedProductsThunk());
-  }, [dispatch, allProducts]);
+    getOwnedProducts();
+  });
 
   return (
     <div className="store-product-container">
@@ -46,7 +45,6 @@ const ProductsOfOwner = () => {
               </NavLink>
               <Link to={`/products/${product.id}`}>
                 <div className="product-edit-delete">
-                  {console.log("Product-id jsx", product.id)}
                   <OpenModalButton
                     buttonText="Delete"
                     className="store-delete-button"

@@ -6,6 +6,7 @@ import {
   getSingleProductThunk,
 } from "../../store/products";
 import { getAllProductsThunk } from "../../store/products";
+import useProductStore from "../../Zustand/productZustand";
 
 import "./CreateForm.css";
 
@@ -17,6 +18,9 @@ const CreateProduct = () => {
   const [price, setPrice] = useState("");
   const [preview_image, setPreview_image] = useState("");
   const [errors, setErrors] = useState({});
+
+  const { allProducts, getallProducts, createNewProduct, getProduct } =
+    useProductStore();
 
   // Set the maximum character limit for description
   const maxDescriptionLength = 100;
@@ -62,9 +66,11 @@ const CreateProduct = () => {
     newProduct.append("preview_image", preview_image);
 
     // Dispatch Thunk
-    const createdProduct = await dispatch(createProductThunk(newProduct));
-    dispatch(getAllProductsThunk());
+    const createdProduct = await createNewProduct(newProduct);
     if (createdProduct) {
+      console.log(createdProduct, "created it");
+      getallProducts();
+      getProduct(createdProduct);
       history.push(`/products/${createdProduct.id}`);
     }
   };
