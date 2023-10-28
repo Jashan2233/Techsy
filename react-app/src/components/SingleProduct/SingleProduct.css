@@ -75,20 +75,27 @@
 .reviews-container {
   margin: 2rem;
   max-width: 800px;
+  border-radius: 8px;
+  padding: 2rem;
 }
 
+/* Style the total reviews text */
 .total-reviews {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: #333;
 }
 
+/* Style the average rating */
 .average-rating {
   font-size: 24px;
   font-weight: bold;
   color: #ff6600;
+  margin-bottom: 1rem;
 }
 
+/* Style the individual reviews */
 .product-reviews {
   margin-top: 1rem;
 }
@@ -97,49 +104,44 @@
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  color: #333;
 }
 
 .fa-star {
   color: #ff6600;
 }
 
-.reviews-details {
+.review-details {
   margin-top: 1rem;
-}
-
-h5 {
-  font-style: italic;
   color: #555;
+}
+
+.review-text {
   margin-top: 0.5rem;
 }
 
-h4 {
+.review-date {
+  font-style: italic;
   margin-top: 0.5rem;
+  color: #777;
 }
 
-#delete-review-home {
-  display: flex;
-  align-items: center;
-}
-
-.update-review {
-  margin-left: 1rem;
-}
-
+/* Style the post review button */
 .post-review-button button {
   display: flex;
   margin-top: 2rem;
   padding: 10px;
   width: 120px;
   border-radius: 6px;
-  background-color: grey;
+  background-color: #333;
   color: white;
   font-weight: bold;
   font-size: 14px;
+  border: none;
 }
 
 .post-review-button button:hover {
-  background-color: orangered;
+  background-color: #ff6600;
   cursor: pointer;
 }
 

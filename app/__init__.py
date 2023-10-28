@@ -54,6 +54,46 @@ Migrate(app, db)
 CORS(app)
 
 
+
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+CLIENT_ID = os.getenv('CLIENT_ID')
+BASE_URL = os.getenv('BASE_URL')
+
+print("Baseurl", BASE_URL)
+print("clientId", CLIENT_ID)
+print("Baseurl", CLIENT_SECRET)
+
+client_secrets = {
+  "web": {
+    "client_id": CLIENT_ID,
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": CLIENT_SECRET,
+    "redirect_uris": [
+      "http://localhost:5000/api/auth/callback"
+    ]
+  }
+}
+
+# Here we are generating a temporary file as the google oauth package requires a file for configuration!
+secrets = NamedTemporaryFile()
+# Note that the property '.name' is the file PATH to our temporary file!
+# The command below will write our dictionary to the temp file AS json!
+with open(secrets.name, "w") as output:
+    json.dump(client_secrets, output)
+
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for local dev
+
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=secrets.name,
+    scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+    redirect_uri="http://localhost:5000/callback"
+)
+
+secrets.close() # This method call deletes our temporary file from the /tmp folder! We no longer need it as our flow object has been configured!
+
+
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
 # Therefore, we need to make sure that in production any

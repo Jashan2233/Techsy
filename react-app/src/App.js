@@ -13,6 +13,8 @@ import Shop from "./components/Shop";
 import SingleProduct from "./components/SingleProduct";
 import LoginFormModal from "./components/LoginFormModal";
 import UserCart from "./components/UserCart";
+import Zustandtest from "./components/Zustandtest";
+import BearCounter from "./components/Zustandtest";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +30,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <LoginFormModal />
+          </Route>
+          <Route path="/zustand">
+            <BearCounter />
           </Route>
           <Route exact path="/products/create">
             <CreateProduct />

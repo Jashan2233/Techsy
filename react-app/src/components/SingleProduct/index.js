@@ -54,7 +54,7 @@ const SingleProduct = () => {
     const payload = {
       user_id: user.id,
       product_id: product_id,
-      quantity: parseInt(count),
+      quantity: parseInt(3),
     };
 
     dispatch(cartActions.thunkAddToCart(payload));

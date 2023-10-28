@@ -1,25 +1,20 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProductsThunk } from "../../store/products";
+import useProductStore from "../../Zustand/productZustand"; // Import your Zustand store
+
 import { NavLink } from "react-router-dom";
 import "./products.css";
 
 const GetAllProducts = () => {
-  const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.products.allProducts);
+  const { allProducts, getallProducts } = useProductStore(); // Use the Zustand store
+
   const products = Object.values(allProducts);
-  const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(getAllProductsThunk());
-  }, [dispatch]);
+    getallProducts(); // Call the getallProducts function from your Zustand store
+  }, []); // Empty dependency array to run the effect only once
 
   const welcomeText = () => {
-    if (sessionUser) {
-      return `Welcome back, ${sessionUser.username}!`;
-    } else {
-      return "Welcome to Techsy!";
-    }
+    // Your welcomeText function remains the same
   };
 
   return (
@@ -30,8 +25,6 @@ const GetAllProducts = () => {
           return (
             <div key={product.id} className="all-products-card">
               <NavLink to={`/products/${product.id}`}>
-                {" "}
-                {/* Wrap the image with NavLink */}
                 <img
                   src={product.preview_image}
                   alt={`${product.name}'s unavailable`}
