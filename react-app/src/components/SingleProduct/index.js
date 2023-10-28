@@ -9,14 +9,18 @@ import OpenModalButton from "../OpenModalButton";
 import CreateReviewModal from "../CreateReviewModal";
 import DeleteReviewModal from "../DeleteReviewModal";
 import UpdateReview from "../UpdateReviewModal";
+//Zustand!
+import useProductStore from "../../Zustand/productZustand";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { product_id } = useParams();
-  const product = useSelector(
-    (state) => state.products.allProducts[product_id]
-  );
+
+  //Zustand State
+  const { allProducts } = useProductStore();
+  const product = allProducts[product_id];
+
   const new_review = useSelector((state) => state.reviews.newReview);
   const userReviews = useSelector((state) => state.reviews.userReviews);
   const user = useSelector((state) => state.session.user);
