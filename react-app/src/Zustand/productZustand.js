@@ -121,11 +121,21 @@ const useProductStore = create((set) => ({
         price,
       }),
     });
+
     if (response.ok) {
-      const data = await response.json();
-      set((state) => {
-        state.allProducts[data.id] = data;
-      });
+      const updatedProduct = await response.json();
+      set((state) => ({
+        ...state, // Spread the current state
+        allProducts: {
+          ...state.allProducts, // Spread the current products
+          [product_id]: updatedProduct, // Update the specific product
+        },
+      }));
+
+      // Return the updated product so you can use it in your component
+      return updatedProduct;
+    } else {
+      console.log("Error editing the product");
     }
   },
 }));

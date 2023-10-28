@@ -12,7 +12,7 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { allProducts } = useProductStore();
+  const { allProducts, editOwnedProduct } = useProductStore();
 
   const product = allProducts[productId];
   console.log("productid in compasa", product);
@@ -54,19 +54,16 @@ const EditProduct = () => {
       return setErrors(errorsObj);
     }
 
-    const editedProduct = await dispatch(
-      productStore.editOwnedProductThunk(
-        {
-          name,
-          description,
-          price,
-        },
-        product_id
-      )
+    const editedProduct = await editOwnedProduct(
+      {
+        name,
+        description,
+        price,
+      },
+      product_id
     );
 
-    if (editedProduct) {
-      console.log("edited is there!!!", editedProduct.id);
+    if (editedProduct && editedProduct.id) {
       history.push(`/products/${editedProduct.id}`);
       dispatch(productStore.getSingleProductThunk(editedProduct.id));
     } else {
