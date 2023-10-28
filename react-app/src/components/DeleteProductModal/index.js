@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../../store/products";
 import { useModal } from "../../context/Modal";
 import { useHistory, useParams } from "react-router-dom";
-import * as productActions from "../../store/products";
+// import * as productActions from "../../store/products";
 import useProductStore from "../../Zustand/productZustand";
 
 const DeleteProduct = ({ product_id }) => {

@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as cartstore from "../../store/shopping_carts";
-import * as productStore from "../../store/products";
+// import * as productStore from "../../store/products";
 import useProductStore from "../../Zustand/productZustand";
 import "./UserCart.css";
 const UserCart = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-  // const products = Object.values(
-  //   useSelector((state) => state.products.allProducts)
-  // );
+
   const { allProducts, getallProducts } = useProductStore();
   const products = Object.values(allProducts);
   const userCart = Object.values(

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import * as productActions from "../../store/products";
+// import * as productActions from "../../store/products";
 import * as reviewActions from "../../store/reviews";
 import * as cartActions from "../../store/shopping_carts";
 import "./SingleProduct.css";

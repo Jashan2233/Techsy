@@ -41,8 +41,6 @@ const useProductStore = create((set) => ({
     }
   },
 
-  // Action to get a single product
-  // Action to get a single product
   getProduct: async (product_id) => {
     // Check if the data is available in localStorage
     const storedSingleProduct = JSON.parse(

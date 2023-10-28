@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import * as productStore from "../../store/products";
+// import * as productStore from "../../store/products";
 import useProductStore from "../../Zustand/productZustand";
 import "./EditProductForm.css";
 
@@ -12,7 +12,7 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { allProducts, editOwnedProduct } = useProductStore();
+  const { allProducts, editOwnedProduct, getProduct } = useProductStore();
 
   const product = allProducts[productId];
   console.log("productid in compasa", product);
@@ -65,7 +65,7 @@ const EditProduct = () => {
 
     if (editedProduct && editedProduct.id) {
       history.push(`/products/${editedProduct.id}`);
-      dispatch(productStore.getSingleProductThunk(editedProduct.id));
+      getProduct(editedProduct.id);
     } else {
       console.log("EDIT FAILED");
     }
