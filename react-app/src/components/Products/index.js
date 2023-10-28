@@ -10,8 +10,8 @@ const GetAllProducts = () => {
   const products = Object.values(allProducts);
 
   useEffect(() => {
-    getallProducts(); // Call the getallProducts function from your Zustand store
-  }, []); // Empty dependency array to run the effect only once
+    getallProducts();
+  }, []);
 
   const welcomeText = () => {
     // Your welcomeText function remains the same

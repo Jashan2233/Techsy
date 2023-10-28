@@ -2,17 +2,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as productStore from "../../store/products";
+import useProductStore from "../../Zustand/productZustand";
 import "./EditProductForm.css";
 
 const EditProduct = () => {
   const { product_id } = useParams();
   // console.log("productid in editform", product_id);
   const productId = parseInt(product_id);
-  console.log("productid in comp", productId);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const product = useSelector((state) => state.products.allProducts[productId]);
+  const { allProducts } = useProductStore();
+
+  const product = allProducts[productId];
+  console.log("productid in compasa", product);
+
   console.log("productstate", product);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");

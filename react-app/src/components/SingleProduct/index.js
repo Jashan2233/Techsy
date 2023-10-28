@@ -16,10 +16,16 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { product_id } = useParams();
+  // // Check if product_id is available
+  // if (!product_id) {
+  //   // Handle the case where product_id is undefined
+  //   return <p>Loading...</p>;
+  // }
 
   //Zustand State
-  const { allProducts } = useProductStore();
+  const { allProducts, getallProducts, getProduct } = useProductStore();
   const product = allProducts[product_id];
+  console.log("zustandproduct", product);
 
   const new_review = useSelector((state) => state.reviews.newReview);
   const userReviews = useSelector((state) => state.reviews.userReviews);
@@ -77,8 +83,8 @@ const SingleProduct = () => {
 
   useEffect(() => {
     dispatch(reviewActions.thunkGetProductReviews(product_id));
-    dispatch(productActions.getSingleProductThunk(product_id));
-    dispatch(productActions.getAllProductsThunk());
+    getProduct(product_id);
+    getallProducts();
   }, [dispatch, product_id, new_review, userReviews]);
 
   if (!product || !reviews) return null;

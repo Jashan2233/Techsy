@@ -1,5 +1,12 @@
 import { create } from "zustand";
 
+// Initial state structure matching your Redux state
+const initialState = {
+  allProducts: {},
+  ownedProducts: {},
+  singleProduct: {},
+};
+
 // Normalization functions
 const normalizingAllProducts = (products) => {
   let normalizedProducts = {};
@@ -20,25 +27,50 @@ const normalizingUserProducts = (products) => {
 };
 
 const useProductStore = create((set) => ({
-  allProducts: {},
-  ownedProducts: {},
-  singleProduct: {},
+  ...initialState, // Initialize state
+
+  // Action to get all products
   getallProducts: async () => {
     const res = await fetch("/api/products");
     if (res.ok) {
       const data = await res.json();
-      set({ allProducts: normalizingAllProducts(data) });
+      set((state) => ({
+        ...state,
+        allProducts: normalizingAllProducts(data),
+      }));
     }
   },
+
+  // Action to get a single product
+  // Action to get a single product
   getProduct: async (product_id) => {
-    const res = await fetch(`/api/products/${product_id}`);
-    if (res.ok) {
-      const data = await res.json();
-      set({ singleProduct: data });
+    // Check if the data is available in localStorage
+    const storedSingleProduct = JSON.parse(
+      localStorage.getItem("singleProduct")
+    );
+    if (storedSingleProduct) {
+      set((state) => ({
+        ...state,
+        singleProduct: storedSingleProduct,
+      }));
     } else {
-      console.log("Error in singlespot thunk!");
+      // If not in localStorage, fetch the data from the API
+      const res = await fetch(`/api/products/${product_id}`);
+      if (res.ok) {
+        const data = await res.json();
+        set((state) => ({
+          ...state,
+          singleProduct: data,
+        }));
+        // Store it in localStorage
+        localStorage.setItem("singleProduct", JSON.stringify(data));
+      } else {
+        console.log("Error in singlespot thunk!");
+      }
     }
   },
+
+  // Action to create a new product
   createNewProduct: async (product) => {
     const res = await fetch("/api/products/create", {
       method: "POST",
@@ -51,6 +83,8 @@ const useProductStore = create((set) => ({
       });
     }
   },
+
+  // Action to delete an owned product
   deleteOwnedProduct: async (product_id) => {
     console.log("delete ID", product_id);
     const res = await fetch(`/api/products/${product_id}`, {
@@ -62,13 +96,20 @@ const useProductStore = create((set) => ({
       });
     }
   },
+
+  // Action to get owned products
   getOwnedProducts: async () => {
     const res = await fetch("/api/products/current");
     if (res.ok) {
       const data = await res.json();
-      set({ ownedProducts: normalizingUserProducts(data) });
+      set((state) => ({
+        ...state,
+        ownedProducts: normalizingUserProducts(data),
+      }));
     }
   },
+
+  // Action to edit an owned product
   editOwnedProduct: async (product, product_id) => {
     const { name, description, price } = product;
     const response = await fetch(`/api/products/${product_id}`, {
