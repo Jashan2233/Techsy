@@ -34,7 +34,9 @@ const SingleProduct = () => {
   let newCount;
   const handleQuantityChange = (e) => {
     newCount = parseInt(e.target.value);
+    console.log(e.target.value, "value!");
     setCount(newCount); // Update the count state
+    console.log("newcount", newCount);
   };
 
   // Calculate Average Rating for a Product
@@ -44,8 +46,9 @@ const SingleProduct = () => {
     avg = sum / reviews.length; // Average!
   }
 
+  console.log();
   // Handle Add to Cart
-  const handleAddToCart = (count) => {
+  const handleAddToCart = () => {
     if (!user) {
       alert("Please Login first!");
       return;
@@ -54,7 +57,7 @@ const SingleProduct = () => {
     const payload = {
       user_id: user.id,
       product_id: product_id,
-      quantity: parseInt(3),
+      quantity: count,
     };
 
     dispatch(cartActions.thunkAddToCart(payload));
@@ -107,7 +110,7 @@ const SingleProduct = () => {
               <select
                 id="select-quantity"
                 value={count}
-                onChange={(e) => setCount(e.target.value)}
+                onChange={handleQuantityChange}
               >
                 {Array.from({ length: 20 }, (_, i) => (
                   <option key={i} value={i + 1}>

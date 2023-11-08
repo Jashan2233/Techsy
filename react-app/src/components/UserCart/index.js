@@ -36,10 +36,25 @@ const UserCart = () => {
     }
   };
 
+  //Handle Empty Cart
+
+  const emptyCart = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      user_id: user.id,
+    };
+
+    await dispatch(cartstore.thunkDeleteItems(payload));
+  };
+
   return (
     <>
       <div className="shopping-cart-container">
         <h1 className="shopping-cart-header">Shopping Cart</h1>
+        <button id="delete-items" onClick={emptyCart}>
+          Clear Cart
+        </button>
         {user && userCart.length ? (
           <div>
             {userCart.map((item, idx) => {

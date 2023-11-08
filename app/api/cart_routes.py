@@ -77,7 +77,7 @@ def delete_item_from_cart():
 @login_required
 def delete_all_items_from_cart():
     data = request.get_json()
-    cart_owner_id = data
+    cart_owner_id = data.get('user_id')
 
     item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.user_id == cart_owner_id).all()
 
@@ -85,4 +85,4 @@ def delete_all_items_from_cart():
         db.session.delete(item)
         db.session.commit()
 
-        return {'message': 'Successfully emptyed the whole Cart'}
+    return {'message': 'Successfully emptyed the whole Cart'}

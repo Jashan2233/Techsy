@@ -60,6 +60,38 @@ export const thunkAddToCart = (product) => async (dispatch) => {
   }
 };
 
+export const thunkUpdateCart = (quantity, item) => async (dispatch) => {
+  const res = await fetch("api/cart", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ quantity: quantity, item: item }),
+  });
+  if (res.ok) {
+    const data = await res.json();
+    await dispatch(actionAddToCart(data));
+    await dispatch(getCartThunk());
+    return data;
+  }
+};
+
+export const thunkDeleteItems = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/cart/delete_all_items_from_cart`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userId),
+  });
+
+  if (res.ok) {
+    await dispatch(getCartThunk());
+  } else {
+    console.log("error in res delete cart");
+  }
+};
+
 const initialState = { userCart: {} };
 
 export default function cartReducer(state = initialState, action) {
