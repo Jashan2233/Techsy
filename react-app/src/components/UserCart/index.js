@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as cartstore from "../../store/shopping_carts";
 import * as productStore from "../../store/products";
 import "./UserCart.css";
-const UserCart = () => {
+
+const UserCart = ({ quantity, item }) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
@@ -11,6 +12,7 @@ const UserCart = () => {
     useSelector((state) => state.products.allProducts)
   );
 
+  const [quantity2, setQuantity] = useState(quantity);
   const userCart = Object.values(
     useSelector((state) => state.userCart.userCart)
   );
@@ -36,8 +38,29 @@ const UserCart = () => {
     }
   };
 
-  //Handle Empty Cart
+  // Handle update Quantity:
+  const updateQuantity = async (e) => {
+    e.preventDefault();
+    const value = parseInt(e.target.value);
+    setQuantity(value);
+  };
 
+  // Handle submitting the quantity change:
+  const submitQuantityChange = async () => {
+    await dispatch(cartstore.thunkUpdateCart(quantity2, item));
+    await dispatch(cartstore.getCartThunk());
+  };
+
+  const options = [];
+  for (let i = 1; i <= 50; i++) {
+    options.push(
+      <option key={i} value={i}>
+        {i}
+      </option>
+    );
+  }
+
+  // Handle Empty Cart
   const emptyCart = async (e) => {
     e.preventDefault();
 
@@ -110,6 +133,27 @@ const UserCart = () => {
                         </span>
                         <span style={{ color: "black" }}> : </span>
                         {item.quantity}
+                      </div>
+                      <div>
+                        <span
+                          style={{
+                            textDecoration: "underline",
+                            fontFamily: "system-ui",
+                            fontSize: "1rem",
+                            color: "black",
+                          }}
+                        >
+                          QUANTITY
+                        </span>
+                        <span style={{ color: "black" }}> : </span>
+                        <select
+                          className="cart-item-counter"
+                          value={quantity2}
+                          onChange={(e) => updateQuantity(e)}
+                        >
+                          {options}
+                        </select>
+                        <button onClick={submitQuantityChange}>Submit</button>
                       </div>
                     </div>
                   </div>

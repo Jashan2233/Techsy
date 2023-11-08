@@ -60,8 +60,9 @@ export const thunkAddToCart = (product) => async (dispatch) => {
   }
 };
 
+//Edit Item Quantity in Cart
 export const thunkUpdateCart = (quantity, item) => async (dispatch) => {
-  const res = await fetch("api/cart", {
+  const res = await fetch(`api/cart/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -73,6 +74,8 @@ export const thunkUpdateCart = (quantity, item) => async (dispatch) => {
     await dispatch(actionAddToCart(data));
     await dispatch(getCartThunk());
     return data;
+  } else {
+    console.log("error in updatethunk!");
   }
 };
 

@@ -5,16 +5,16 @@ from flask_login import login_required, current_user
 cart_routes = Blueprint('cart', __name__)
 
 
-#Get Cart from User
+# Get Cart from User
 @cart_routes.route('/')
 def get_shopping_cart():
     owner_id = current_user.id
-    carts = Shopping_Cart.query.filter_by(user_id= owner_id).all()
+    carts = Shopping_Cart.query.filter_by(user_id=owner_id).all()
 
     return {"carts": [cart.to_dict() for cart in carts]}
 
 
-#add Product with Quantity to Cart
+# add Product with Quantity to Cart
 @cart_routes.route('/', methods=['POST'])
 @login_required
 def adding_to_cart():
@@ -24,14 +24,16 @@ def adding_to_cart():
 
     cartProduct = Product.query.get(product_id)
 
-    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(Shopping_Cart.user_id == owner_id).first()
+    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(
+        Shopping_Cart.user_id == owner_id).first()
 
     if item_in_cart is None:
-        cart_item = Shopping_Cart(user_id=owner_id, product_id=cartProduct.id, quantity=product_quantity)
+        cart_item = Shopping_Cart(
+            user_id=owner_id, product_id=cartProduct.id, quantity=product_quantity)
         db.session.add(cart_item)
         db.session.commit()
 
-        return(cart_item.to_dict())
+        return (cart_item.to_dict())
 
     else:
         item_in_cart.quantity += product_quantity
@@ -39,17 +41,19 @@ def adding_to_cart():
         db.session.commit()
         return item_in_cart.to_dict()
 
-#Edit Product quantity in Cart
+# Edit Product quantity in Cart
+
+
 @cart_routes.route('/', methods=['PUT'])
 @login_required
 def update_cart_item_quantity():
     data = request.get_json()
-    quantity = data['quantity']
-    product_id = data['item']['id']
+    quantity = data.get['quantity']
+    product_id = data.get['item']['id']
     owner_id = current_user.id
 
-    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(Shopping_Cart.user_id == owner_id).first()
-
+    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(
+        Shopping_Cart.user_id == owner_id).first()
 
     item_in_cart.quantity = quantity
     db.session.add(item_in_cart)
@@ -57,14 +61,15 @@ def update_cart_item_quantity():
     return item_in_cart.to_dict()
 
 
-#DELETE item from Cart
+# DELETE item from Cart
 @cart_routes.route('/delete_single_item', methods=['DELETE'])
 def delete_item_from_cart():
     data = request.get_json()
     product_id = data['product_id']
     owner_id = current_user.id
 
-    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(Shopping_Cart.user_id == owner_id).first()
+    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(
+        Shopping_Cart.user_id == owner_id).first()
 
     db.session.delete(item_in_cart)
     db.session.commit()
@@ -72,14 +77,15 @@ def delete_item_from_cart():
     return {'message': 'Item Deleted Successfully from Cart !!!'}
 
 
-#DELETE All Items from Cart
+# DELETE All Items from Cart
 @cart_routes.route('/delete_all_items_from_cart', methods=['DELETE'])
 @login_required
 def delete_all_items_from_cart():
     data = request.get_json()
     cart_owner_id = data.get('user_id')
 
-    item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.user_id == cart_owner_id).all()
+    item_in_cart = Shopping_Cart.query.filter(
+        Shopping_Cart.user_id == cart_owner_id).all()
 
     for item in item_in_cart:
         db.session.delete(item)
