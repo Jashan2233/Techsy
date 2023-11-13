@@ -48,17 +48,28 @@ def adding_to_cart():
 @login_required
 def update_cart_item_quantity():
     data = request.get_json()
-    quantity = data.get['quantity']
-    product_id = data.get['item']['id']
+
+    # Check if 'item' exists in the JSON payload
+    if 'item' in data and data['item'] is not None:
+        # Access 'id' property if 'item' is not None
+        product_id = data['item'].get('id')
+    else:
+        # Handle the case where 'item' is not present or is None
+        return jsonify(error="Invalid data payload"), 400
+
+    quantity = data.get('quantity')
     owner_id = current_user.id
 
     item_in_cart = Shopping_Cart.query.filter(Shopping_Cart.product_id == product_id).filter(
         Shopping_Cart.user_id == owner_id).first()
 
-    item_in_cart.quantity = quantity
-    db.session.add(item_in_cart)
-    db.session.commit()
-    return item_in_cart.to_dict()
+    if item_in_cart:
+        item_in_cart.quantity = quantity
+        db.session.add(item_in_cart)
+        db.session.commit()
+        return item_in_cart.to_dict()
+    else:
+        return jsonify(error="Item not found in the cart"), 404
 
 
 # DELETE item from Cart

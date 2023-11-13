@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as cartstore from "../../store/shopping_carts";
 import * as productStore from "../../store/products";
+import Counter from "./QuantityTracker";
 import "./UserCart.css";
 
 const UserCart = ({ quantity, item }) => {
@@ -16,6 +17,8 @@ const UserCart = ({ quantity, item }) => {
   const userCart = Object.values(
     useSelector((state) => state.userCart.userCart)
   );
+
+  const userCartObj = useSelector((state) => state.userCart.userCart);
   console.log(userCart);
 
   useEffect(() => {
@@ -44,10 +47,23 @@ const UserCart = ({ quantity, item }) => {
     const value = parseInt(e.target.value);
     setQuantity(value);
   };
-
-  // Handle submitting the quantity change:
   const submitQuantityChange = async () => {
+    const currentItem = userCartObj.product_id;
+
+    // if (!item) {
+    //   console.error("Current item not found");
+    //   return;
+    // }
+
+    // const product = products.find((p) => p.id === currentItem.product_id);
+
+    // if (!product) {
+    //   console.error("Product not found");
+    //   return;
+    // }
+
     await dispatch(cartstore.thunkUpdateCart(quantity2, item));
+    console.log(currentItem, "itm!!!!");
     await dispatch(cartstore.getCartThunk());
   };
 
@@ -75,9 +91,11 @@ const UserCart = ({ quantity, item }) => {
     <>
       <div className="shopping-cart-container">
         <h1 className="shopping-cart-header">Shopping Cart</h1>
-        <button id="delete-items" onClick={emptyCart}>
-          Clear Cart
-        </button>
+        <div className="delete-button-container">
+          <button id="delete-items" onClick={emptyCart}>
+            Clear Cart
+          </button>
+        </div>
         {user && userCart.length ? (
           <div>
             {userCart.map((item, idx) => {
@@ -135,25 +153,9 @@ const UserCart = ({ quantity, item }) => {
                         {item.quantity}
                       </div>
                       <div>
-                        <span
-                          style={{
-                            textDecoration: "underline",
-                            fontFamily: "system-ui",
-                            fontSize: "1rem",
-                            color: "black",
-                          }}
-                        >
-                          QUANTITY
-                        </span>
-                        <span style={{ color: "black" }}> : </span>
-                        <select
-                          className="cart-item-counter"
-                          value={quantity2}
-                          onChange={(e) => updateQuantity(e)}
-                        >
-                          {options}
-                        </select>
-                        <button onClick={submitQuantityChange}>Submit</button>
+                        <div className="update-quantity-container">
+                          <Counter quantity={item.quantity} item={product} />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -161,7 +163,11 @@ const UserCart = ({ quantity, item }) => {
               ) : null;
             })}
           </div>
-        ) : null}
+        ) : (
+          <div className="empty-cart-message">
+            <p>You don't have anything in your cart yet!</p>
+          </div>
+        )}
       </div>
     </>
   );

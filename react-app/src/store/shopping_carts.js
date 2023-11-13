@@ -62,6 +62,7 @@ export const thunkAddToCart = (product) => async (dispatch) => {
 
 //Edit Item Quantity in Cart
 export const thunkUpdateCart = (quantity, item) => async (dispatch) => {
+  console.log("Update Cart Payload:", { quantity, item });
   const res = await fetch(`api/cart/`, {
     method: "PUT",
     headers: {

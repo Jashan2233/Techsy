@@ -6,8 +6,10 @@
 }
 
 .shopping-cart-header {
-    font-size: 2.5rem;
+    font-size: 2.7rem;
     margin-bottom: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: underline;
 }
 
 .cart-card {
@@ -52,4 +54,28 @@
 
 .cart-item-info-container span {
     font-size: 1.2rem;
+}
+
+
+.delete-button-container {
+    margin: 10px;
+}
+#delete-items {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: lightgray;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#delete-items:hover {
+    background-color: orangered;
+    cursor: pointer;
+}
+
+.empty-cart-message {
+    font-weight: bold;
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
