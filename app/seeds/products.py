@@ -2,6 +2,7 @@ from app.models import db, Product, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import date
 
+
 def seed_products():
     product1 = Product(
         owner_id=1,
@@ -60,7 +61,7 @@ def seed_products():
     product7 = Product(
         owner_id=1,
         name='iRobot - Roomba i7+ (7550) Wi-Fi Connected Self-Emptying Robot Vacuum',
-        description='acuuming that fits seamlessly into your life. The i7+ learns your home and navigates to where the messes are, right when they happen—so you can effortlessly keep your floors clean.',
+        description='Vacuuming that fits seamlessly into your life. The i7+ learns your home and navigates to where the messes are, right when they happen—so you can effortlessly keep your floors clean.',
         price=599.99,
         preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6280/6280529_sd.jpg',
         created_at=date.today(),
@@ -94,14 +95,100 @@ def seed_products():
         updated_at=date.today()
     )
 
-    all_products = [product1, product2, product3, product4, product5, product6, product7, product8, product9, product10]
+    product11 = Product(
+        owner_id=2,
+        name='Dell XPS 13 Laptop',
+        description='Powerful and portable, the Dell XPS 13 laptop delivers high performance in a sleek, compact design.',
+        price=1299.99,
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6540/6540612_sd.jpg',
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+    product12 = Product(
+        owner_id=3,
+        name='Sony WH-1000XM4 Wireless Noise-Canceling Headphones',
+        description='Experience industry-leading noise cancellation with the Sony WH-1000XM4 headphones.',
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6408/6408356_rd.jpg',
+        price=349.99,
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+    product13 = Product(
+        owner_id=1,
+        name='LG OLED65C1 65" 4K OLED TV',
+        description='Immerse yourself in stunning visuals with the LG OLED65C1 65" 4K OLED TV.',
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6535/6535929_sd.jpg',
+        price=2499.99,
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+    product14 = Product(
+        owner_id=2,
+        name='Logitech MX Master 3 Wireless Mouse',
+        description='Enhance your productivity with the Logitech MX Master 3 wireless mouse.',
+        price=99.99,
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6502/6502577_sd.jpg',
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+    product15 = Product(
+        owner_id=3,
+        name='Amazon Echo Show 10 (3rd Gen)',
+        description='The Amazon Echo Show 10 (3rd Gen) features a 10.1" HD screen that follows you around the room.',
+        price=249.99,
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6430/6430065_sd.jpg',
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+    product16 = Product(
+        owner_id=1,
+        name='Samsung Galaxy S21 Ultra 5G',
+        description='Capture pro-quality photos with the Samsung Galaxy S21 Ultra 5G.',
+        price=1199.99,
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6465/6465024cv18d.jpg',
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+    product17 = Product(
+        owner_id=2,
+        name='Nikon D850 DSLR Camera',
+        description='Unleash your creativity with the Nikon D850 DSLR camera.',
+        price=2999.99,
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6084/6084300_sd.jpg',
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+    product18 = Product(
+        owner_id=3,
+        name='Fitbit Charge 5 Fitness Tracker',
+        description='Track your fitness journey with the Fitbit Charge 5 fitness tracker.',
+        price=179.99,
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6559/6559662_sd.jpg',
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+    product19 = Product(
+        owner_id=1,
+        name='Microsoft Surface Pro 7',
+        description='The Microsoft Surface Pro 7 combines the power of a laptop with the flexibility of a tablet.',
+        price=899.99,
+        preview_image='https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6482/6482181cv14d.jpg',
+        created_at=date.today(),
+        updated_at=date.today(),
+    )
+
+    all_products = [product1, product2, product3, product4, product5, product6, product7, product8, product9, product10,
+                    product11, product12, product13, product14, product15, product16, product17, product18, product19]
+
     add_products = [db.session.add(product) for product in all_products]
 
     db.session.commit()
 
+
 def undo_products():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM products"))
 

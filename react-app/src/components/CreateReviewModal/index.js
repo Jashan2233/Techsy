@@ -26,7 +26,7 @@ const CreateReviewModal = ({ product_id }) => {
     } else if (review.length > 50) {
       errors.review = "Review can't be more than 50 characters long.";
     } else {
-      errors.review = ""; // Clear the error when review length is within the allowed range
+      errors.review = ""; // Clear the error when the review length is within the allowed range
     }
     setValidationErrors(errors);
   }, [review]);
@@ -69,63 +69,21 @@ const CreateReviewModal = ({ product_id }) => {
             <p>{validationErrors.review}</p>
           )}
           <div className="stars-review">
-            <div
-              className={
-                activeRating >= 1
-                  ? "fa-sharp fa-solid fa-star"
-                  : "fa-sharp fa-regular fa-star"
-              }
-              onMouseEnter={() => setActiveRating(1)}
-              onClick={() => setRating(1)}
-            ></div>
-            <div
-              className={
-                activeRating >= 2
-                  ? "fa-sharp fa-solid fa-star"
-                  : "fa-sharp fa-regular fa-star"
-              }
-              onMouseEnter={() => setActiveRating(2)}
-              onClick={() => {
-                setRating(2);
-                setActiveRating(2);
-              }}
-            ></div>
-            <div
-              className={
-                activeRating >= 3
-                  ? "fa-sharp fa-solid fa-star"
-                  : "fa-sharp fa-regular fa-star"
-              }
-              onMouseEnter={() => setActiveRating(3)}
-              onClick={() => {
-                setRating(3);
-                setActiveRating(3);
-              }}
-            ></div>
-            <div
-              className={
-                activeRating >= 4
-                  ? "fa-sharp fa-solid fa-star"
-                  : "fa-sharp fa-regular fa-star"
-              }
-              onMouseEnter={() => setActiveRating(4)}
-              onClick={() => {
-                setRating(4);
-                setActiveRating(4);
-              }}
-            ></div>
-            <div
-              className={
-                activeRating >= 5
-                  ? "fa-sharp fa-solid fa-star"
-                  : "fa-sharp fa-regular fa-star"
-              }
-              onMouseEnter={() => setActiveRating(5)}
-              onClick={() => {
-                setRating(5);
-                setActiveRating(5);
-              }}
-            ></div>
+            {[1, 2, 3, 4, 5].map((star) => (
+              <div
+                key={star}
+                className={
+                  rating && rating >= star
+                    ? "fa-sharp fa-solid fa-star"
+                    : "fa-sharp fa-regular fa-star"
+                }
+                onMouseEnter={() => setActiveRating(star)}
+                onClick={() => {
+                  setRating(star);
+                  setActiveRating(star);
+                }}
+              ></div>
+            ))}
             Rating
           </div>
           <button type="submit">Submit Your Review</button>
