@@ -6,28 +6,31 @@ import "./EditProductForm.css";
 
 const EditProduct = () => {
   const { product_id } = useParams();
-  // console.log("productid in editform", product_id);
   const productId = parseInt(product_id);
-  console.log("productid in comp", productId);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const product = useSelector((state) => state.products.allProducts[productId]);
-  console.log("productstate", product);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [previewImage, setPreviewImage] = useState(null); // State to hold the image file
   const [errors, setErrors] = useState({});
 
-  //Prepopulating Form!
   useEffect(() => {
     if (product) {
-      console.log("Product edit here", product);
       setName(product.name);
       setDescription(product.description);
       setPrice(product.price);
+    } else {
+      console.log("cant find product!!");
     }
   }, [product]);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setPreviewImage(file);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ const EditProduct = () => {
     }
     if (!price.length || price < 5 || price.toString().length > 5) {
       errorsObj.price =
-        "Please enter a valid price with up to 5 digits, dont use Decimals!.";
+        "Please enter a valid price with up to 5 digits, don't use Decimals!.";
     }
     if (!description || description.length < 5 || description.length > 200)
       errorsObj.description =
@@ -50,23 +53,20 @@ const EditProduct = () => {
       return setErrors(errorsObj);
     }
 
-    const editedProduct = await dispatch(
-      productStore.editOwnedProductThunk(
-        {
-          name,
-          description,
-          price,
-        },
-        product_id
-      )
+    const newProduct = new FormData();
+    newProduct.append("name", name);
+    newProduct.append("description", description);
+    newProduct.append("price", price);
+    if (previewImage) {
+      newProduct.append("preview_image", previewImage);
+    }
+
+    const updatedProduct = await dispatch(
+      productStore.editOwnedProductThunk(newProduct, product_id)
     );
 
-    if (editedProduct) {
-      console.log("edited is there!!!", editedProduct.id);
-      history.push(`/products/${editedProduct.id}`);
-      dispatch(productStore.getSingleProductThunk(editedProduct.id));
-    } else {
-      console.log("EDIT FAILED");
+    if (updatedProduct) {
+      history.push(`/products/${updatedProduct.id}`);
     }
   };
 
@@ -124,6 +124,15 @@ const EditProduct = () => {
               value={price} // Prepopulate price field
               placeholder="Price"
               name="price"
+            />
+          </div>
+          <div className="edit-product-photo">
+            <label className="edit-product-label">Product Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              name="preview_image"
             />
           </div>
           <div className="edit-submit-button-container">

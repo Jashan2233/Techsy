@@ -36,8 +36,8 @@ export const getOwnedProducts = (products) => {
   };
 };
 
-export const editOwnedProduct = (products) => {
-  return { type: EDIT_OWNED_PRODUCTS, products };
+export const editOwnedProduct = (product) => {
+  return { type: EDIT_OWNED_PRODUCTS, product };
 };
 
 //NORMALIZATION FUNCTIONS
@@ -111,15 +111,9 @@ export const getOwnedProductsThunk = () => async (dispatch) => {
 // Edit a product owned by User
 export const editOwnedProductThunk =
   (product, product_id) => async (dispatch) => {
-    const { name, description, price } = product;
     const response = await fetch(`/api/products/${product_id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        description,
-        price,
-      }),
+      body: product, // Sending form data directly
     });
     if (response.ok) {
       const data = await response.json();
@@ -175,11 +169,20 @@ const allProductsReducer = (state = initialState, action) => {
       newState.ownedProducts = action.products;
       return newState;
     }
+    // Assuming the action payload contains the updated product object
     case EDIT_OWNED_PRODUCTS: {
-      const newState = { ...state };
-      newState.allProducts[action.products.id] = action.products;
+      const updatedProduct = action.product;
+
+      const newState = {
+        ...state,
+        allProducts: {
+          ...state.allProducts,
+          [updatedProduct.id]: updatedProduct,
+        },
+      };
       return newState;
     }
+
     default:
       return state;
   }
