@@ -1,0 +1,71 @@
+/* Styles for the modal container */
+.create-review-modal {
+    font-family: Arial, sans-serif;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the modal heading */
+.create-review-modal h3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Styles for the textarea input */
+.create-review-modal textarea {
+    width: calc(100% - 20px);
+    /* Adjust the width to account for padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    box-sizing: border-box;
+    /* Ensures padding and border are included in the width calculation */
+    margin-right: 20px;
+    /* Provide a margin to prevent the text from touching the modal edge */
+}
+
+/* Styles for the error message */
+.create-review-modal p {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Styles for the star rating section */
+.stars-review {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.stars-review div {
+    font-size: 25px;
+    color: orangered;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+/* Styles for the submit button */
+.create-review-modal button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: grey;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-review-modal button:hover {
+    background-color: orangered;
+}

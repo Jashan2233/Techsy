@@ -7,7 +7,7 @@ import * as productActions from "../../store/products";
 const DeleteProduct = ({ product_id }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log("product_id in modal", product_id);
+
   // const product = useSelector((state) => state.products.ownedProducts);
   // console.log("Product in delete", product);
   const { closeModal } = useModal();

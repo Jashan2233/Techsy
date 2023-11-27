@@ -164,3 +164,50 @@
   width: 150px;
   border-radius: 15px;
 }
+
+/* Styles for the delete-update-review-container */
+#delete-update-review-container {
+  display: flex;
+  justify-content: flex-end;
+  /* Aligns buttons to the right */
+  margin-top: 20px;
+}
+
+/* Styles for the delete-review and update-review containers */
+.delete-review,
+.update-review {
+  margin-right: 10px;
+  /* Adjust the margin between buttons */
+}
+
+/* Styles for the buttons within delete-review and update-review */
+.delete-review button,
+.update-review button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Delete Review button */
+.delete-review button {
+  background-color: orangered;
+  color: #fff;
+}
+
+.delete-review button:hover {
+  background-color: #d23f00;
+  /* Darker shade of orangered on hover */
+}
+
+/* Edit Review button */
+.update-review button {
+  background-color: orangered;
+  color: #fff;
+}
+
+.update-review button:hover {
+  background-color: orangered;
+  /* Darker shade of blue on hover */
+}

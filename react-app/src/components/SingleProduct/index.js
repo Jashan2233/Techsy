@@ -34,9 +34,7 @@ const SingleProduct = () => {
   let newCount;
   const handleQuantityChange = (e) => {
     newCount = parseInt(e.target.value);
-    console.log(e.target.value, "value!");
     setCount(newCount); // Update the count state
-    console.log("newcount", newCount);
   };
 
   // Calculate Average Rating for a Product
@@ -61,7 +59,6 @@ const SingleProduct = () => {
     };
 
     dispatch(cartActions.thunkAddToCart(payload));
-    console.log(newCount, "newcount");
     history.push("/cart");
   };
 
@@ -139,28 +136,37 @@ const SingleProduct = () => {
                     <i key={i} className="fa-solid fa-star"></i>
                   ))}
                 </h3>
-                {userReview && userReview.id === review.id && (
-                  <div id="delete-review-home">
-                    <OpenModalButton
-                      buttonText="Delete Review"
-                      modalComponent={
-                        <DeleteReviewModal review_id={review.id} />
-                      }
-                    />
-                    <div className="update-review">
-                      <OpenModalButton
-                        buttonText="Edit Review"
-                        modalComponent={<UpdateReview review_id={review.id} />}
-                      />
+
+                <div className="review-actions">
+                  <span>
+                    {new Date(review.created_at).toLocaleString("default", {
+                      month: "long",
+                    })}{" "}
+                    {new Date(review.created_at).getFullYear()}
+                  </span>
+
+                  {userReview && userReview.id === review.id && (
+                    <div id="delete-update-review-container">
+                      <div className="delete-review">
+                        <OpenModalButton
+                          buttonText="Delete Review"
+                          modalComponent={
+                            <DeleteReviewModal review_id={review.id} />
+                          }
+                        />
+                      </div>
+                      <div className="update-review">
+                        <OpenModalButton
+                          buttonText="Edit Review"
+                          modalComponent={
+                            <UpdateReview review_id={review.id} />
+                          }
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
-                <h5>
-                  {new Date(review.created_at).toLocaleString("default", {
-                    month: "long",
-                  })}{" "}
-                  {new Date(review.created_at).getFullYear()}
-                </h5>
+                  )}
+                </div>
+
                 <h4>{review.review}</h4>
               </div>
             ))}

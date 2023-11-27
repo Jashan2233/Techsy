@@ -39,7 +39,6 @@ export const getCartThunk = () => async (dispatch) => {
 //Add Product to Cart
 
 export const thunkAddToCart = (product) => async (dispatch) => {
-  // console.log("PRODUCT WENT THROUGH HERE!!:",product)
   const response = await fetch(`/api/cart/`, {
     method: "POST",
     headers: {
@@ -50,7 +49,6 @@ export const thunkAddToCart = (product) => async (dispatch) => {
 
   if (response.ok) {
     const cartProduct = await response.json();
-    console.log("response in post cart", cartProduct);
     // const normalizedCartProduct = normalizeCarts(cartProduct)
     await dispatch(actionAddToCart(cartProduct));
     await dispatch(getCartThunk());
@@ -62,7 +60,6 @@ export const thunkAddToCart = (product) => async (dispatch) => {
 
 //Edit Item Quantity in Cart
 export const thunkUpdateCart = (quantity, item) => async (dispatch) => {
-  console.log("Update Cart Payload:", { quantity, item });
   const res = await fetch(`api/cart/`, {
     method: "PUT",
     headers: {

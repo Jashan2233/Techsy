@@ -76,7 +76,6 @@ export const getAllProductsThunk = () => async (dispatch) => {
 export const getSingleProductThunk = (product_id) => async (dispatch) => {
   const res = await fetch(`/api/products/${product_id}`);
   if (res.ok) {
-    console.log("hitted the thunk spot!!!");
     const data = await res.json();
     dispatch(getProduct(data));
   } else {
@@ -103,7 +102,6 @@ export const getOwnedProductsThunk = () => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     // const normalizedProducts = normalizingUserProducts(data);
-    console.log("got products of owner", data);
     dispatch(getOwnedProducts(data));
   }
 };
@@ -124,7 +122,6 @@ export const editOwnedProductThunk =
 
 // Delete own Product
 export const deleteOwnedProductThunk = (product_id) => async (dispatch) => {
-  console.log("delete ID", product_id);
   const res = await fetch(`/api/products/${product_id}`, {
     method: "DELETE",
   });
@@ -149,8 +146,6 @@ const allProductsReducer = (state = initialState, action) => {
     }
     case GET_PRODUCT: {
       const newState = { ...state, allProducts: { ...state.allProducts } };
-      // console.log('------ACTION-----', action)
-      // console.log('-----NEWSTATE---', newState)
       newState.singleProduct = action.id;
       return newState;
     }

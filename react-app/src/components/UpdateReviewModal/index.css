@@ -1,0 +1,66 @@
+/* Styles for the update review container */
+.update-review-container {
+    font-family: Arial, sans-serif;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Styles for the update review title */
+.update-review-title-header {
+    margin-bottom: 20px;
+    color: black;
+    /* Blue color for the title */
+}
+
+/* Styles for the review errors */
+.update-review-errors {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* Styles for the review text box */
+.review-text-box {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+/* Styles for the star rating section */
+.stars-review {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.stars-review div {
+    color: orangered;
+    /* Gold color for stars */
+    cursor: pointer;
+}
+
+/* Styles for the submit button */
+.update-review-submit-container button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: grey;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-review-submit-container button:hover {
+    background-color: orangered;
+}

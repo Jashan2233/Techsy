@@ -19,7 +19,6 @@ const UserCart = ({ quantity, item }) => {
   );
 
   const userCartObj = useSelector((state) => state.userCart.userCart);
-  console.log(userCart);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +62,7 @@ const UserCart = ({ quantity, item }) => {
     // }
 
     await dispatch(cartstore.thunkUpdateCart(quantity2, item));
-    console.log(currentItem, "itm!!!!");
+
     await dispatch(cartstore.getCartThunk());
   };
 

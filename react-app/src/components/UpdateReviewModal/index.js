@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useModal } from "../../context/Modal";
 import * as reviewActions from "../../store/reviews";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import "./index.css";
 
 const UpdateReview = ({ review_id }) => {
   const { product_id } = useParams;
@@ -12,14 +13,12 @@ const UpdateReview = ({ review_id }) => {
     (state) => state.reviews.productReviews[review_id]
   );
   // const previousReview = previousReviews[review_id];
-  console.log("review_id", review_id);
 
   // Check if previousReview exists before accessing its properties
   const [rating, setRating] = useState(""); // Initialize with the existing rating or default to 1
   const [reviewButton, setReviewButton] = useState();
   const [errors, setErrors] = useState("");
   const [review, setReview] = useState("");
-  console.log("this is preview reviews", previousReviews);
 
   useEffect(() => {
     if (previousReviews) {

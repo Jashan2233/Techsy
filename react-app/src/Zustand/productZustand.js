@@ -52,7 +52,6 @@ const useProductStore = create((set) => ({
     }
   },
   deleteOwnedProduct: async (product_id) => {
-    console.log("delete ID", product_id);
     const res = await fetch(`/api/products/${product_id}`, {
       method: "DELETE",
     });

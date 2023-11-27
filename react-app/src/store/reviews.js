@@ -71,7 +71,6 @@ export const thunkCreateProductReview =
 
     if (response.ok) {
       const new_review = await response.json();
-      console.log("HITTED CREATE REVIEW!", new_review);
       dispatch(actionCreateProductReview(new_review));
     } else {
       console.log("errors in create review!!");
@@ -117,7 +116,6 @@ const productReviewsReducer = (state = initialState, action) => {
 
     case DELETE_REVIEW:
       // Create new objects without the deleted review
-      console.log("STATEHERE", state);
       const { [action.reviewId]: deletedReview, ...userReviews } =
         state.userReviews;
       const { [action.reviewId]: deletedProductReview, ...productReviews } =

@@ -46,7 +46,6 @@ const ProductsOfOwner = () => {
               </NavLink>
               <Link to={`/products/${product.id}`}>
                 <div className="product-edit-delete">
-                  {console.log("Product-id jsx", product.id)}
                   <OpenModalButton
                     buttonText="Delete"
                     className="store-delete-button"

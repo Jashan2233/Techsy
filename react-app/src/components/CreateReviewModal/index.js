@@ -3,6 +3,7 @@ import { useModal } from "../../context/Modal";
 import { useEffect, useState } from "react";
 import * as reviewActions from "../../store/reviews";
 import * as productActions from "../../store/products";
+import "./index.css";
 
 const CreateReviewModal = ({ product_id }) => {
   const user = useSelector((state) => state.session.user);
@@ -40,7 +41,6 @@ const CreateReviewModal = ({ product_id }) => {
         rating,
       };
 
-      console.log("Payload", payload);
       await dispatch(
         reviewActions.thunkCreateProductReview(product_id, payload)
       );
