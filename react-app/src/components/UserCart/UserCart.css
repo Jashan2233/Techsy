@@ -67,10 +67,11 @@
     color: black;
     font-weight: bold;
     font-size: 18px;
+    border: none;
 }
 
 #delete-items:hover {
-    background-color: orangered;
+    background-color: red;
     cursor: pointer;
 }
 
