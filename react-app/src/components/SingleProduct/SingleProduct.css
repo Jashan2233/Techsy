@@ -211,3 +211,8 @@
   background-color: orangered;
   /* Darker shade of blue on hover */
 }
+
+.add-to-cart-button-container label {
+  font-weight: bold;
+  font-size: 18px;
+}
