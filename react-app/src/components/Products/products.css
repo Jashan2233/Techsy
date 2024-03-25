@@ -55,7 +55,6 @@
 }
 
 .socials {
-  background-color: lightblue;
   display: flex;
   color: white;
   text-align: center;
@@ -67,7 +66,6 @@
 }
 
 .landing-footer {
-  background-color: lightblue;
   display: flex;
   flex-direction: column;
   color: Black;
