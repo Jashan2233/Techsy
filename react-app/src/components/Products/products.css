@@ -36,7 +36,7 @@
 }
 
 .all-products-image {
-  width: 100%;
+  width: 90%;
   max-height: 200px;
   object-fit: cover;
   border-radius: 7px;
