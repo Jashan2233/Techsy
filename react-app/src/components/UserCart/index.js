@@ -17,9 +17,7 @@ const UserCart = ({ quantity, item }) => {
   const userCart = Object.values(
     useSelector((state) => state.userCart.userCart)
   );
-
   const userCartObj = useSelector((state) => state.userCart.userCart);
-
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(cartstore.getCartThunk());
