@@ -40,24 +40,12 @@ const UserCart = ({ quantity, item }) => {
 
   // Handle update Quantity:
   const updateQuantity = async (e) => {
-    e.preventDefault();
+    e.preventDefault();font-size: 14px;
     const value = parseInt(e.target.value);
     setQuantity(value);
   };
   const submitQuantityChange = async () => {
     const currentItem = userCartObj.product_id;
-
-    // if (!item) {
-    //   console.error("Current item not found");
-    //   return;
-    // }
-
-    // const product = products.find((p) => p.id === currentItem.product_id);
-
-    // if (!product) {
-    //   console.error("Product not found");
-    //   return;
-    // }
 
     await dispatch(cartstore.thunkUpdateCart(quantity2, item));
 
