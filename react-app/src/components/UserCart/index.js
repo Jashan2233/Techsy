@@ -40,13 +40,14 @@ const UserCart = ({ quantity, item }) => {
 
   // Handle update Quantity:
   const updateQuantity = async (e) => {
-    e.preventDefault();font-size: 14px;
+    e.preventDefault();
     const value = parseInt(e.target.value);
     setQuantity(value);
   };
   const submitQuantityChange = async () => {
     const currentItem = userCartObj.product_id;
 
+  
     await dispatch(cartstore.thunkUpdateCart(quantity2, item));
 
     await dispatch(cartstore.getCartThunk());
