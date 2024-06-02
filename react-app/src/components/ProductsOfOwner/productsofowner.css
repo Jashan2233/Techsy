@@ -50,6 +50,9 @@
     background-color: rgb(224, 99, 27);
     border-radius: 10px;
     padding: 10px;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
    }
 
   .store-delete-button,
