@@ -46,11 +46,13 @@ const ProductsOfOwner = () => {
               </NavLink>
               <Link to={`/products/${product.id}`}>
                 <div className="product-edit-delete">
+                  <div className="product-delete-button" >
                   <OpenModalButton
                     buttonText="Delete"
                     className="store-delete-button"
                     modalComponent={<DeleteProduct product_id={product.id} />}
                   />
+                  </div>
                   <NavLink to={`/products/${product.id}/edit`}>
                     <i className="fa-solid fa-pen"></i>
                     <button className="store-edit-button">Edit Product</button>
