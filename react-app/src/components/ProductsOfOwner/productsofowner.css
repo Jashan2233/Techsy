@@ -47,8 +47,9 @@
     }
 
    .product-delete-button button {
-    background-color: red;
+    background-color: rgb(224, 99, 27);
     border-radius: 10px;
+    padding: 10px;
    }
 
   .store-delete-button,
