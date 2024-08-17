@@ -20,7 +20,7 @@ const GetAllProducts = () => {
   const welcomeText = () => {
     // Your welcomeText function remains the same
     if (user) {
-      return `Welcome back to Techs, ${user.username}!`;
+      return `Welcome back to Tech, ${user.username}!`;
     } else {
       return "Welcome to Techsy!";
     }
