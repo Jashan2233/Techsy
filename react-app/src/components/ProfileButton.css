@@ -17,7 +17,7 @@
 
 .profile-dropdown li {
   padding: 10px 20px;
-  cursor: pointer;
+  cursor: progress;
   transition: background-color 0.2s;
 }
 
