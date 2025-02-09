@@ -24,7 +24,7 @@
   .new-product-description,
   .new-product-price,
   .new-product-preview-img {
-    margin-bottom: 21em;
+    margin-bottom: 2em;
     display: flex;
     flex-direction: column;
   }
