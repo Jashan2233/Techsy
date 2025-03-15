@@ -20,7 +20,7 @@
     max-width: 599px;
   }
 
-  .new-product-name,
+  .new-product-nam
   .new-product-description,
   .new-product-price,
   .new-product-preview-img {
@@ -37,7 +37,7 @@
 
   .new-product-errors {
     color: #ff6600;
-    font-size: 17px;
+    font-size: 14px;
     margin-top: 5px;
   }
 
